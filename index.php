@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="fontawesome/css/all.css">
-    <link rel="stylesheet" href="bootstrap4/css/bootstrap.css">
-    <title>Gizah</title>
+    <?php require_once("include/head.inc.php"); ?>
     <style>
         
         html, body
@@ -44,7 +36,7 @@
                     <div class="card-header text-center">Área de acesso</div>
                     <div class="card-body pt-0">
                         <img class="img-fluid w-75 d-block mx-auto my-3" src="img/pyramid-310785_960_720.png" alt="Gizah">
-                        <form action="inicial.htm" class="mx-auto">
+                        <form action="inicial.php" class="mx-auto">
                             <div class="input-group form-group">
                                 <span class="input-group-text input-group-prepend">
                                     <i class="fas fa-user" aria-hidden="true"></i>
@@ -70,8 +62,6 @@
             </div>
         </div>
     </div>
-    <script src="fontawesome/js/all.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="bootstrap4/js/bootstrap.js"></script>
+    <?php require_once("include/scripts.inc.php"); ?>
 </body>
 </html>
