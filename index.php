@@ -33,9 +33,9 @@
         <div class="row align-self-center">
             <div class="col">
                 <div class="card bg-light mb-3" style>
-                    <div class="card-header text-center">Área de acesso</div>
+                    <div class="card-header text-center mb-3">Área de acesso</div>
                     <div class="card-body pt-0">
-                        <img class="img-fluid w-75 d-block mx-auto my-3" src="img/pyramid-310785_960_720.png" alt="Gizah">
+                        <!-- <img class="img-fluid w-75 d-block mx-auto my-3" src="img/pyramid-310785_960_720.png" alt="Gizah"> -->
                         <form action="inicial.php" class="mx-auto">
                             <div class="input-group form-group">
                                 <span class="input-group-text input-group-prepend">
@@ -49,11 +49,10 @@
                                 </span>
                                 <input class="form-control" placeholder="Senha" type="password">
                             </div>
-                            <div class="form-check m-0 ml-2 mb-3">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input">
-                                    Lembrar minha senha
-                                </label>
+                            <div class="m-0 ml-1 mb-3">
+                                <a href="">
+                                    <u>Esqueceu sua senha?</u>
+                                </a>
                             </div>
                             <input type="submit" value="Entrar" class="w-100">
                         </form>

@@ -8,4 +8,4 @@
 <link rel="stylesheet" href="bootstrap4/css/bootstrap.css">
 <link rel="stylesheet" href="bootstrap4/css/dashboard.css">
 <link rel="stylesheet" href="css/logado.css">
-<title>Gizah</title>
+<title>TCC</title>

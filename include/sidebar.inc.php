@@ -16,36 +16,36 @@
         padding-right: 0.3rem;
     }
 </style>
-
-<nav class="col-2 bg-light sidebar" style="overflow-y: auto;">
+<div class="col-2 invisible"></div>
+<nav class="col-2 bg-light sidebar">
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="inicial.php">
+                <a class="nav-link d-block text-truncate" href="inicial.php">
                     <i class="far fa-id-card" aria-hidden="true"></i>
                     <span>Meus dados</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="historico.php">
+                <a class="nav-link d-block text-truncate" href="historico.php">
                     <i class="fas fa-history" aria-hidden="true"></i>
                     <span>Histórico</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link d-block text-truncate" href="adicionar.php">
                     <i class="fas fa-plus" aria-hidden="true"></i>
                     <span>Adicionar relatório</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link d-block text-truncate" href="avaliar.php">
                     <i class="fas fa-check" aria-hidden="true"></i>
                     <span>Avaliar</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
+                <a class="nav-link d-block text-truncate" href="index.php">
                     <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                     <span>Sair</span>
                 </a>
@@ -57,13 +57,13 @@
         </h6>
         <ul class="nav d-flex flex-column mb-2">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link d-block text-truncate" href="#">
                     <span class="far fa-file-alt"></span>
                     <span>Relatório</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link d-block text-truncate" href="#">
                     <span class="far fa-file-alt"></span>
                     <span>Relatório</span>
                 </a>
