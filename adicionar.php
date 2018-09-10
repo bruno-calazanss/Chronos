@@ -45,20 +45,20 @@
                     </thead>
                     <tbody>
                         <?php for($i=1; $i<=5; $i++): ?>
-                        <tr id="<?= " item$i " ?>">
+                        <tr id="<?= "item$i" ?>">
                             <td>
-                                <input class="form-control" type="text" size="50" name="<?= " n$i " ?>">
+                                <input class="form-control" type="text" size="50" name="<?= "n$i" ?>">
                             </td>
                             <td>
-                                <input class="form-control" type="date" name="<?= " d$i " ?>">
+                                <input class="form-control" type="date" name="<?= "d$i" ?>">
                             </td>
                             <td>
-                                <input class="form-control" type="number" min="1" name="<?= " h$i " ?>">
+                                <input class="form-control" type="number" min="1" name="<?= "h$i" ?>">
                             </td>
                             <td>
                                 <span class="btn btn-light fileinput-button px-3">
                                     <i class="fas fa-arrow-up"></i>
-                                    <input type="file" min="1" name="<?= " c$i " ?>">
+                                    <input type="file" min="1" name="<?= "c$i" ?>">
                                 </span>
                             </td>
                         </tr>
@@ -76,25 +76,6 @@
                     </tbody>
                 </table>
             </main>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="progress fixed-bottom" style="visibility: hidden;">
                 <div class="progress-bar progress-bar-success" style="width: 0%;"></div>
             </div>
