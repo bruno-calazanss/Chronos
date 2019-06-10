@@ -2,22 +2,17 @@
 <html lang="pt">
 <head>
     <?php require_once("include/head.inc.php"); ?>
-    <style>
-        
-        html, body
-        {
-            width: 100%;
-            height: 100%;
-        }
+</head>
+<body>
 
-        .container
-        {
+    <style scoped>
+        .container-fluid, .row {
             min-height: 100vh;
         }
 
-        .img-fluid
-        {
-            max-width: 40vmin;
+        .img-fluid {
+            width: 40%;
+            max-width: 10rem;
         }
         
         .input-group-text
@@ -27,15 +22,14 @@
         }
 
     </style>
-</head>
-<body>
-    <div class="d-flex container justify-content-center">
-        <div class="row align-self-center">
-            <div class="col">
+
+    <div class="container-fluid">
+        <div class="row justify-content-center align-content-center">
+            <div class="col-10 col-sm-8 col-md-5 col-lg-4 col-xl-3">
                 <div class="card bg-light mb-3" style>
-                    <div class="card-header text-center mb-3">Área de acesso</div>
+                    <div class="card-header text-center">Área de acesso</div>
                     <div class="card-body pt-0">
-                        <!-- <img class="img-fluid w-75 d-block mx-auto my-3" src="img/pyramid-310785_960_720.png" alt="Gizah"> -->
+                        <img class="img-fluid d-block mx-auto my-4" src="img/hourglass-152090_960_720.png" alt="Chronos">
                         <form action="inicial.php" class="mx-auto">
                             <div class="input-group form-group">
                                 <span class="input-group-text input-group-prepend">

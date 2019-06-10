@@ -1,9 +1,29 @@
-<div class="navbar navbar-dark fixed-top bg-dark p-0 shadow">
-    <div class="navbar-brand col-2 mr-0 text-center text-truncate" href="#">1610470400006</div>
-    <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Buscar" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sair</a>
-        </li>
-    </ul> -->
-</div>
+<style scoped>
+
+    .navbar {
+        z-index: 100;
+    }
+
+    .navbar div{
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+        background-color: rgba(0, 0, 0, .25);
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+    }
+
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+    .shadow {
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+    }
+
+</style>
+
+<nav class="navbar navbar-dark bg-dark shadow p-0">
+    <div class="navbar-brand col-12 col-sm-5 col-md-3 col-lg-2 text-truncate" href="#">
+        <a class="navbar-brand mr-2 p-0" href="#"><i class="fas fa-bars d-inline d-md-none"></i></a>
+        <a class="navbar-brand p-0" href="#">Menu</a>
+    </div>
+</nav>

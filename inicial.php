@@ -2,56 +2,55 @@
 <html lang="pt">
 <head>
     <?php require_once("include/head.inc.php"); ?>
-    <style>
-        #user form figure *:first-child {
-            width: 10rem;
-            height: auto;
-        }
+</head>
 
-        #user form span {
-            background-color: #e9ecef;
+<body>
+    <?php require_once("include/navbar.inc.php"); ?>
+    <?php require_once("include/sidebar.inc.php"); ?>
+
+    <style scoped>
+
+        #user form figure *:first-child {
+            width: 100%;
+            height: auto;
+            max-width: 13rem;
         }
 
         .form-group {
             display: inline-block;
         }
 
-        #user {
-            min-width: 15rem;
-            min-height: 19rem;
-        }
     </style>
-</head>
 
-<body>
-    <?php require_once("include/navbar.inc.php"); ?>
     <div class="container-fluid">
-        <div class="row">
-            <?php require_once("include/sidebar.inc.php"); ?>
-            <main role="main" class="col-10 ml-auto pl-5 mr-3">
-                <div id="user" class="card mt-5">
-                    <form class="card-body bg-light rounded p-3 mt-0" style="border-width: 4px !important;">
-                        <figure class="d-inline-block float-left m-4 mr-5">
+        <div class="row justify-content-end">
+            <main role="main" class="col-md-9 col-lg-10 px-5 pt-5">
+                <div id="user" class="card">
+                    <div class="card-header">
+                        Dados de usuário
+                    </div>
+                    <form class="card-body bg-light rounded p-3 text-center text-lg-left" style="border-width: 4px !important;">
+                        <figure class="d-inline-block float-left col-md-12 col-lg-4 col-xl-3 mb-0 p-4 pr-lg-5 text-center">
                             <i class="fas fa-user-circle d-inline-block"></i>
                             <figcaption class="text-center h6">exemplo.usr</figcaption>
                         </figure>
-                        <div class="form-group mr-4">
+                        <div class="form-group d-block d-sm-inline-block mx-0 mr-sm-4 text-left text-lg-left">
                             <label class="h5">Aluno(a):</label>
                             <input class="form-control" type="text" value="Exemplo de nome" size="50" disabled>
                         </div>
-                        <div class="form-group mr-4">
+                        <div class="form-group d-block d-sm-inline-block mx-0 mr-sm-4 text-left text-lg-left">
                             <label class="h5">E-mail:</label>
                             <input class="form-control" type="text" value="meu.email@abc.com" size="25" disabled>
                         </div>
-                        <div class="form-group mr-4">
+                        <div class="form-group d-block d-sm-inline-block mx-0 mr-sm-4 text-left text-lg-left">
                             <label class="h5">Mátricula:</label>
                             <input class="form-control" type="text" value="0000000000000" size="13" disabled>
                         </div>
-                        <div class="form-group mr-4">
+                        <div class="form-group d-block d-sm-inline-block mx-0 mr-sm-4 text-left text-lg-left">
                             <label class="h5">Telefone:</label>
                             <input class="form-control" type="text" value="(00) 00000-0000" size="15" disabled>
                         </div>
-                        <div class="form-group mr-4">
+                        <div class="form-group d-block d-sm-inline-block mx-0 mr-sm-4 text-left text-lg-left">
                             <label class="h5">Horas computadas:</label>
                             <input class="form-control" type="text" value="50" size="4" disabled>
                         </div>

@@ -4,8 +4,7 @@
 <meta name="author" content="">
 <link rel="icon" href="">
 <link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/global.css">
 <link rel="stylesheet" href="fontawesome/css/all.css">
 <link rel="stylesheet" href="bootstrap4/css/bootstrap.css">
-<link rel="stylesheet" href="bootstrap4/css/dashboard.css">
-<link rel="stylesheet" href="css/logado.css">
 <title>TCC</title>

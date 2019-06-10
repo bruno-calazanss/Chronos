@@ -16,7 +16,7 @@
         }
 
         .table {
-            border-collapse: separate;
+            /* border-collapse: separate; */
             border-spacing: 2px;
         }
 
@@ -50,13 +50,13 @@
                             <?php for($i=1; $i<=5; $i++): ?>
                             <tr id="<?= "item$i" ?>">
                                 <td>
-                                    <input class="form-control" type="text" size="50" name="<?= "n$i" ?>">
+                                    <input class="form-control" type="text" size="50" name="<?= "n$i" ?>" value="Exemplo de atividade" readonly>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="date" name="<?= "d$i" ?>">
+                                    <input class="form-control" type="text" name="<?= "d$i" ?>" value="00/00/0000" readonly>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="number" min="1" name="<?= "h$i" ?>">
+                                    <input class="form-control" type="text" min="1" name="<?= "h$i" ?>" value="00" readonly>
                                 </td>
                                 <td>
                                     <span class="btn btn-light fileinput-button px-3">
@@ -66,16 +66,6 @@
                                 </td>
                             </tr>
                             <?php endfor; ?>
-                            <tr>
-                                <td colspan="2" class="d-table-cell border-0 btn btn-primary">
-                                    <i class="fas fa-plus"></i>
-                                    Adicionar item
-                                </td>
-                                <td colspan="2" class="d-table-cell border-0 btn btn-success">
-                                    <i class="fas fa-save"></i>
-                                    Enviar relatório
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
