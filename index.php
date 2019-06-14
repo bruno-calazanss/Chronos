@@ -35,7 +35,7 @@
                                 <span class="input-group-text input-group-prepend">
                                     <i class="fas fa-user" aria-hidden="true"></i>
                                 </span>
-                                <input class="form-control" placeholder="Usuário">
+                                <input class="form-control" placeholder="Matrícula">
                             </div>
                             <div class="input-group form-group mb-2">
                                 <span class="input-group-text input-group-prepend">

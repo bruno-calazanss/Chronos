@@ -41,6 +41,7 @@
                         <thead class="font-weight-bold bg-light">
                             <tr>
                                 <th>Nome da atividade</th>
+                                <th>Categoria</th>
                                 <th>Data</th>
                                 <th>Qtd. de horas</th>
                                 <th>Comprovante</th>
@@ -51,6 +52,24 @@
                             <tr id="<?= "item$i" ?>">
                                 <td>
                                     <input class="form-control" type="text" size="50" name="<?= "n$i" ?>">
+                                </td>
+                                <td>
+                                    <select class="custom-select">
+                                        <option selected disabled hidden value></option>
+                                        <optgroup label="Ensino">
+                                        <option value="10">Disciplinas não previstas</option>
+                                        <option value="11">Cursos de atualização</option>
+                                        <option value="12">Monitoria</option>
+                                        <option value="13">Estágio não-obrigatório</option>
+                                        <optgroup label="Extensão">
+                                        <option value="20">Eventos internos</option>
+                                        <option value="21">Eventos externos</option>
+                                        <option value="22">Ministrar cursos de extensão</option>
+                                        <optgroup label="Pesquisa">
+                                        <option value="30">Iniciação científica (Tecnológica e Inovação)&nbsp;</option>
+                                        <option value="31">Publicações</option>
+                                        <option value="32">Apresentação de trabalho científico</option>
+                                    </select>
                                 </td>
                                 <td>
                                     <input class="form-control" type="date" name="<?= "d$i" ?>">
@@ -67,7 +86,7 @@
                             </tr>
                             <?php endfor; ?>
                             <tr>
-                                <td colspan="2" class="d-table-cell border-0 btn btn-primary">
+                                <td colspan="3" class="d-table-cell border-0 btn btn-primary">
                                     <i class="fas fa-plus"></i>
                                     Adicionar item
                                 </td>
