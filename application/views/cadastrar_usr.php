@@ -20,39 +20,39 @@
                     Formulário de cadastro
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="<?= base_url('index.php/cadastrar_usr/cadastrar')?>" method="POST">
                         <div class="form-row">
                             <div class="form-group px-2 col-md-6">
                                 <label for="matricula">Matrícula:</label>
-                                <input type="text" class="form-control" id="matricula">
+                                <input type="text" class="form-control" id="matricula" name="matricula">
                             </div>
                             <div class="form-group px-2 col-md-6">
                                 <label for="tipo">Tipo:</label>
-                                <select id="tipo" class="form-control">
+                                <select id="tipo" name="tipo" class="form-control">
                                     <option disabled selected hidden></option>
-                                    <option>Aluno</option>
-                                    <option>Coordenador</option>
+                                    <option value="AL">Aluno</option>
+                                    <option value="C">Coordenador</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group px-2 col-md-6">
-                                <label for="email">E-mail:</label>
-                                <input type="email" class="form-control" id="email" placeholder="exemplo@email.com">
+                                <label for="nome">Nome:</label>
+                                <input type="text" class="form-control" id="nome" name="nome">
                             </div>
                             <div class="form-group px-2 col-md-6">
-                                <label for="conf_email">Confirmação de e-mail:</label>
-                                <input type="email" class="form-control" id="conf_email" placeholder="exemplo@email.com">
+                                <label for="nome_usr">Nome de usuário:</label>
+                                <input type="text" class="form-control" id="nome_usr" name="nome_usr">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group px-2 col-md-6">
-                                <label for="senha">Senha:</label>
-                                <input type="password" class="form-control" id="senha">
+                                <label for="email">E-mail:</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@email.com">
                             </div>
                             <div class="form-group px-2 col-md-6">
-                                <label for="conf_senha">Confirmação de senha:</label>
-                                <input type="password" class="form-control" id="conf_senha">
+                                <label for="conf_email">Confirmação de e-mail:</label>
+                                <input type="email" class="form-control" id="conf_email" name="conf_email" placeholder="exemplo@email.com">
                             </div>
                         </div>
                         <button type="submit" class="d-block mx-auto btn btn-primary">Cadastrar</button>

@@ -59,7 +59,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="adicionar_usr">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/cadastrar_usr')?>">
                 <i class="fas fa-user-plus"></i>
                 <div>Cadastrar usuário</div>
             </a>
