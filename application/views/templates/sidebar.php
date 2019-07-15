@@ -53,7 +53,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="adicionar">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/adicionar_relatorio')?>">
                 <i class="fas fa-plus"></i>
                 <div>Adicionar relatório</div>
             </a>

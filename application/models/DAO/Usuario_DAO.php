@@ -16,6 +16,7 @@ class Usuario_DAO extends CI_Model {
                     'tipo' => $usr->tipo,
                     'status' => $usr->status];
         $this->db->insert('usuario', $dados);
+        return $this->db->insert_id();
     }
 
     function buscar($campo, $valor) {
