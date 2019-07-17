@@ -41,13 +41,13 @@
 <nav class="col-8 col-sm-5 col-md-3 col-lg-2 bg-light sidebar d-none d-md-block">
     <ul class="nav flex-column pt-2">
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="inicial">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/dados_usr')?>">
                 <i class="far fa-id-card"></i>
                 <div>Meus dados</div>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="historico">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/historico')?>">
                 <i class="fas fa-history"></i>
                 <div>Histórico</div>
             </a>
@@ -65,13 +65,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="avaliar">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/avaliar')?>">
                 <i class="fas fa-check"></i>
                 <div>Avaliar</div>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="index">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php')?>">
                 <i class="fas fa-sign-out-alt"></i>
                 <div>Sair</div>
             </a>
@@ -83,25 +83,25 @@
     </h6>
     <ul class="nav flex-column mb-2">
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="relatorio">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/relatorio')?>">
                 <i class="far fa-file-alt"></i>
                 <div>Relatório</div>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="relatorio">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/relatorio')?>">
                 <i class="far fa-file-alt"></i>
                 <div>Relatório</div>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="relatorio">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/relatorio')?>">
                 <i class="far fa-file-alt"></i>
                 <div>Relatório</div>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="relatorio">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/relatorio')?>">
                 <i class="far fa-file-alt"></i>
                 <div>Relatório</div>
             </a>

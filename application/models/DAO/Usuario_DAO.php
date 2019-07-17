@@ -60,6 +60,24 @@ class Usuario_DAO extends CI_Model {
         }
         return $retUsrs; 
     }
+
+    function validar_acesso($nome_usr, $senha) {
+        $this->db->select('*');
+        $this->db->from('usuario');
+        $this->db->where('nome_usr', $nome_usr);
+        $this->db->where('senha', $senha);
+        $this->db->where('status', TRUE);
+        
+        $query = $this->db->get();
+
+        if ($query->num_rows() === 1) { 
+            $usr = Usuario::Builder($query->result()[0]->nome, $query->result()[0]->matricula, $query->result()[0]->email, 
+                                    $query->result()[0]->nome_usr, $query->result()[0]->tipo, $query->result()[0]->status);
+            $usr->set('id', $query->result()[0]->id);
+            return $usr;
+        }
+        return false;
+    }
 }
 
 ?>

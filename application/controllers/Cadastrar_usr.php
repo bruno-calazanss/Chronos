@@ -22,7 +22,6 @@ class Cadastrar_usr extends CI_Controller {
         // $this->output->enable_profiler(TRUE);
 
         // VALIDATION RULES
-        $this->load->library('form_validation');
         $this->form_validation->set_rules('matricula', 'Matrícula', 'required|numeric|min_length[13]');
         $this->form_validation->set_rules('tipo', 'Tipo', 'required');
         $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|max_length[70]');

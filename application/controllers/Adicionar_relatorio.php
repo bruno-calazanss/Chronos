@@ -22,7 +22,6 @@ class Adicionar_relatorio extends CI_Controller {
         $this->output->enable_profiler(TRUE);
 
         // VALIDATION RULES
-        $this->load->library('form_validation');
         $this->form_validation->set_rules('nome[]', 'Nome da atividade', 'required|max_length[80]');
         $this->form_validation->set_rules('categoria[]', 'Categoria', 'required|max_length[45]');
         $this->form_validation->set_rules('data[]', 'Data', 'required');
