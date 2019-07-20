@@ -9,17 +9,22 @@ class Adicionar_relatorio extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('templates/head', ['fileUpload' => true]);
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $includes['scripts'] = $this->load->view('templates/scripts', NULL, TRUE);
-        $this->load->view('adicionar_relatorio', $includes);
-        $this->load->view('templates/footer');
+        if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado'])) {
+            $this->load->view('templates/head', ['fileUpload' => true]);
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $includes['scripts'] = $this->load->view('templates/scripts', NULL, TRUE);
+            $this->load->view('adicionar_relatorio', $includes);
+            $this->load->view('templates/footer');
+        }
+        else {
+            redirect(base_url('index.php'));
+        }
     }
 
     function adicionar() {
 
-        $this->output->enable_profiler(TRUE);
+        // $this->output->enable_profiler(TRUE);
 
         // VALIDATION RULES
         $this->form_validation->set_rules('nome[]', 'Nome da atividade', 'required|max_length[80]');
@@ -46,7 +51,7 @@ class Adicionar_relatorio extends CI_Controller {
 
             $this->db->trans_complete();
         }
-        // redirect(base_url('index.php/adicionar_relatorio'));
+        redirect(base_url('index.php/adicionar_relatorio'));
     }
 }
 

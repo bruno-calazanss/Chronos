@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Coordenador_DAO extends CI_Model {
 

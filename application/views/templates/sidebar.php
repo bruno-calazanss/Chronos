@@ -71,7 +71,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/sair')?>">
                 <i class="fas fa-sign-out-alt"></i>
                 <div>Sair</div>
             </a>

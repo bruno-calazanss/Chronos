@@ -9,12 +9,17 @@ class Cadastrar_usr extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('templates/head');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('cadastrar_usr');
-        $this->load->view('templates/scripts');
-        $this->load->view('templates/footer');
+        if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado'])) {
+            $this->load->view('templates/head');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('cadastrar_usr');
+            $this->load->view('templates/scripts');
+            $this->load->view('templates/footer');
+        }
+        else {
+            redirect(base_url('index.php'));
+        }
     }
 
     function cadastrar() {
@@ -32,12 +37,13 @@ class Cadastrar_usr extends CI_Controller {
 
         if ($this->form_validation->run() == TRUE) {
             $this->load->model(['usuario', 'DAO/usuario_dao']);
+            $this->load->helper('string');
 
             $this->db->trans_start();
             
             $usr = Usuario::Builder($this->input->post('nome'), $this->input->post('matricula'), $this->input->post('email'), 
                                     $this->input->post('nome_usr'), $this->input->post('tipo'), TRUE);
-            $usr->set('senha', 'teste');
+            $usr->set('senha', random_string('alnum', 10));
 
             $usuario_id = $this->usuario_dao->inserir($usr);
 
@@ -59,6 +65,20 @@ class Cadastrar_usr extends CI_Controller {
                 }
             }
             $this->db->trans_complete();
+
+            if ($this->db->trans_status() === TRUE)
+            {
+                $this->load->library('email');
+                
+                $this->email->to('smtp@smtp.com');
+                $this->email->from('smtp@smtp.com', 'smtp');
+                
+                $this->email->subject('Chronos - Senha temporária');
+                $this->email->message("Cadastro concluído! <br> Usuário: {$usr->nome_usr} <br> Senha temporária: {$usr->senha}");
+                
+                $this->email->send();
+                // $this->email->print_debugger();
+            }
         }
         redirect(base_url('index.php/cadastrar_usr'));
     }

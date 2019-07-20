@@ -14,7 +14,7 @@ class Autenticar_usr extends CI_Controller {
 
     function autenticar() {
 
-        $this->output->enable_profiler(TRUE);
+        // $this->output->enable_profiler(TRUE);
 
         // VALIDATION RULES
         $this->form_validation->set_rules('nome_usr', 'Nome de usuário', 'required');
