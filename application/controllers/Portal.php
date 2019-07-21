@@ -10,34 +10,6 @@ class Portal extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    public function dados_usr() {
-        if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado'])) {
-            $this->load->view('templates/head');
-            $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar');
-            $this->load->view('dados_usr');
-            $this->load->view('templates/scripts');
-            $this->load->view('templates/footer');
-        }
-        else {
-            redirect(base_url('index.php'));
-        }
-    }
-
-    public function historico() {
-        if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado'])) {
-            $this->load->view('templates/head');
-            $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar');
-            $this->load->view('historico');
-            $this->load->view('templates/scripts');
-            $this->load->view('templates/footer');
-        }
-        else {
-            redirect(base_url('index.php'));
-        }
-    }
-
     public function avaliar() {
         if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado'])) {
             $this->load->view('templates/head');

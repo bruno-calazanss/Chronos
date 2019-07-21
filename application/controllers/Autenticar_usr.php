@@ -5,6 +5,7 @@ class Autenticar_usr extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->model(['usuario', 'DAO/usuario_dao']);
     }
 
     public function index()
@@ -23,14 +24,13 @@ class Autenticar_usr extends CI_Controller {
 
         if ($this->form_validation->run() == TRUE) {
             
-            $this->load->model(['usuario', 'DAO/usuario_dao']);
             $usr = $this->usuario_dao->validar_acesso($this->input->post('nome_usr'), $this->input->post('senha'));
             
             if($usr === false) {
                 $this->index();
             }
 
-            $this->session->usr_autenticado = $usr;
+            $this->session->usr_autenticado = (array) $usr;
             redirect(base_url('index.php/Portal/dados_usr'));
         }
         $this->index();

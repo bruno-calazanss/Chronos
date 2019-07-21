@@ -14,6 +14,7 @@ class Atividade_DAO extends CI_Model {
                      'nome' => $atv->nome,
                      'data' => $atv->data,
                      'qtd_horas' => $atv->qtd_horas,
+                     'horas_validadas' => $atv->horas_validadas,
                      'categoria' => $atv->categoria,
                      'comprovante' => $atv->comprovante];
         $this->db->insert('atividade', $dados);
@@ -38,6 +39,7 @@ class Atividade_DAO extends CI_Model {
                      'nome' => $atv->nome,
                      'data' => $atv->data,
                      'qtd_horas' => $atv->qtd_horas,
+                     'horas_validadas' => $atv->horas_validadas,
                      'categoria' => $atv->categoria,
                      'comprovante' => $atv->comprovante];
         $this->db->replace('atividade', $dados);
@@ -55,8 +57,25 @@ class Atividade_DAO extends CI_Model {
 
         foreach($query->result() as $i => $atv) {
             $retAtividades[$i] = Atividade::Builder($atv->id, $atv->relatorio_id, $atv->nome, $atv->data, $atv->qtd_horas, $atv->comprovante);
+            $retAtividades[$i]->set('horas_validadas', $atv->horas_validadas);
         }
         return $retAtividades; 
+    }
+
+    function somar_horas_informadas($relatorio_id) {
+        $this->db->select_sum('qtd_horas', 'soma_horas');
+        $this->db->where('relatorio_id', $relatorio_id);
+        $this->db->from('atividade');
+        $query = $this->db->get();
+        return $query->result()[0]->soma_horas;
+    }
+
+    function somar_horas_validadas($relatorio_id) {
+        $this->db->select_sum('horas_validadas', 'soma_horas');
+        $this->db->where('relatorio_id', $relatorio_id);
+        $this->db->from('atividade');
+        $query = $this->db->get();
+        return $query->result()[0]->soma_horas;
     }
 }
 

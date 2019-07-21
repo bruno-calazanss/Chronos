@@ -21,12 +21,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach($relatorios as $i => $relatorio): ?>
                         <tr>
-                            <td>Aprovado</td>
-                            <td>00/00/0000</td>
-                            <td>10</td>
-                            <td>5</td>
+                            <td><?= ($relatorio->estado == 0) ? "Pendente" : "Avaliado" ?></td>
+                            <td><?= $relatorio->data ?></td>
+                            <td><?= $soma_horas_informadas[$i] ?></td>
+                            <td><?= ($soma_horas_validadas[$i] == '') ? 'Pendente' : $soma_horas_validadas[$i] ?></td>
                         </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

@@ -41,13 +41,13 @@
 <nav class="col-8 col-sm-5 col-md-3 col-lg-2 bg-light sidebar d-none d-md-block">
     <ul class="nav flex-column pt-2">
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/dados_usr')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/dados_usr')?>">
                 <i class="far fa-id-card"></i>
                 <div>Meus dados</div>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/historico')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/historico')?>">
                 <i class="fas fa-history"></i>
                 <div>Histórico</div>
             </a>

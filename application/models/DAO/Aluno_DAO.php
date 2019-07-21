@@ -30,9 +30,9 @@ class Aluno_DAO extends CI_Model {
         $query = $this->db->get();
 
         foreach($query->result() as $i => $aluno) {
-            $retAlunos[$i] = Aluno::Builder($aluno->id);
+            $retAlunos[$i] = Aluno::Builder($aluno->usuario_id);
             $retAlunos[$i]->set('disc_nprevistas', $aluno->disc_nprevistas)->set('cursos_atualizacao', $aluno->cursos_atualizacao)
-                          ->set('monitoria', $aluno->monitoria)->set('estagio_nobrigatorio', $aluno->$estagio_nobrigatorio)->set('ev_internos', $aluno->ev_internos)
+                          ->set('monitoria', $aluno->monitoria)->set('estagio_nobrigatorio', $aluno->estagio_nobrigatorio)->set('ev_internos', $aluno->ev_internos)
                           ->set('ev_externos', $aluno->ev_externos)->set('cursos_ext', $aluno->cursos_ext)->set('init_cientifica', $aluno->init_cientifica)
                           ->set('publicacoes', $aluno->publicacoes)->set('trab_cientifico', $aluno->trab_cientifico);
         }
@@ -68,11 +68,18 @@ class Aluno_DAO extends CI_Model {
         foreach($query->result() as $i => $aluno) {
             $retAlunos[$i] = Aluno::Builder($aluno->id);
             $retAlunos[$i]->set('disc_nprevistas', $aluno->disc_nprevistas)->set('cursos_atualizacao', $aluno->cursos_atualizacao)
-                          ->set('monitoria', $aluno->monitoria)->set('estagio_nobrigatorio', $aluno->$estagio_nobrigatorio)->set('ev_internos', $aluno->ev_internos)
+                          ->set('monitoria', $aluno->monitoria)->set('estagio_nobrigatorio', $aluno->estagio_nobrigatorio)->set('ev_internos', $aluno->ev_internos)
                           ->set('ev_externos', $aluno->ev_externos)->set('cursos_ext', $aluno->cursos_ext)->set('init_cientifica', $aluno->init_cientifica)
                           ->set('publicacoes', $aluno->publicacoes)->set('trab_cientifico', $aluno->trab_cientifico);
         }
         return $retAlunos; 
+    }
+
+    function total_horas_computadas($usuario_id) {
+        $aluno = $this->buscar('usuario_id', $usuario_id)[0];
+        return $aluno->disc_nprevistas + $aluno->cursos_atualizacao + $aluno->monitoria + $aluno->estagio_nobrigatorio + 
+               $aluno->ev_internos + $aluno->ev_externos + $aluno->cursos_ext + $aluno->init_cientifica + $aluno->publicacoes + 
+               $aluno->trab_cientifico;
     }
 }
 

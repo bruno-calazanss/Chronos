@@ -8,6 +8,7 @@ class Atividade extends CI_Model {
     public $nome;
     public $data;
     public $qtd_horas;
+    public $horas_validadas;
     public $categoria;
     public $comprovante;
 
