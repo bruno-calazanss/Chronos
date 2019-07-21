@@ -31,7 +31,7 @@ class Autenticar_usr extends CI_Controller {
             }
 
             $this->session->usr_autenticado = (array) $usr;
-            redirect(base_url('index.php/Portal/dados_usr'));
+            redirect(base_url('index.php/dados_usr'));
         }
         $this->index();
     }
