@@ -29,13 +29,13 @@
                             <span class="input-group-text input-group-prepend">
                                 <i class="fas fa-user" aria-hidden="true"></i>
                             </span>
-                            <input class="form-control" name="nome_usr" placeholder="Nome de usuário">
+                            <input class="form-control" name="nome_usr" placeholder="Nome de usuário" required>
                         </div>
                         <div class="input-group form-group mb-2">
                             <span class="input-group-text input-group-prepend">
                                 <i class="fas fa-lock" aria-hidden="true"></i>
                             </span>
-                            <input class="form-control" name="senha" placeholder="Senha" type="password">
+                            <input class="form-control" name="senha" placeholder="Senha" type="password" required>
                         </div>
                         <div class="m-0 ml-1 mb-3">
                             <a href="">

@@ -40,10 +40,10 @@
                             <?php for($i=1; $i<=1; $i++): ?>
                             <tr id="<?= "item$i" ?>">
                                 <td>
-                                    <input class="form-control" type="text" size="50" name="nome[]">
+                                    <input class="form-control" type="text" size="50" name="nome[]" required>
                                 </td>
                                 <td>
-                                    <select class="custom-select" name="categoria[]">
+                                    <select class="custom-select" name="categoria[]" required>
                                         <option selected disabled hidden value></option>
                                         <optgroup label="Ensino">
                                             <option value="10">Disciplinas não previstas</option>
@@ -64,10 +64,10 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="date" name="data[]">
+                                    <input class="form-control" type="date" name="data[]" required>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="number" min="1" name="horas[]">
+                                    <input class="form-control" type="number" min="1" name="horas[]" required>
                                 </td>
                                 <td>
                                     <span class="btn btn-light fileinput-button px-3">
@@ -82,12 +82,13 @@
                                     <i class="fas fa-plus"></i>
                                     Adicionar item
                                 </td>
-                                <td colspan="2" onclick="$('form').submit()" class="d-table-cell border-0 btn btn-success">
+                                <td colspan="2" onclick="$('#enviar').trigger('click')" class="d-table-cell border-0 btn btn-success">
                                     <i class="fas fa-save"></i>
                                     Enviar relatório
                                 </td>
                             </tr>
                         </tbody>
+                        <button id="enviar" type="submit" class="invisible">
                     </form>
                 </table>
             </div>
