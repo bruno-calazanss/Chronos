@@ -20,7 +20,7 @@
                     Formulário de cadastro
                 </div>
                 <div class="card-body">
-                    <form action="<?= base_url('index.php/cadastrar_usr/cadastrar')?>" method="POST">
+                    <form action="<?= base_url('index.php/controle_usuario/cadastrar')?>" method="POST">
                         <div class="form-row">
                             <div class="form-group px-2 col-md-6">
                                 <label for="matricula">Matrícula:</label>

@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group d-block d-sm-inline-block mx-0 mr-sm-4 text-left text-lg-left">
                         <label class="h5">Mátricula:</label>
-                        <input class="form-control" type="text" value="<?= $tipo ?>" size="13" disabled>
+                        <input class="form-control" type="text" value="<?= $matricula ?>" size="13" disabled>
                     </div>
                     <div class="form-group d-block d-sm-inline-block mx-0 mr-sm-4 text-left text-lg-left">
                         <label class="h5">Tipo de conta:</label>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group d-block d-sm-inline-block mx-0 mr-sm-4 text-left text-lg-left">
                         <label class="h5">Horas computadas:</label>
-                        <input class="form-control" type="text" value="<?= $total_horas_computadas ?>" size="4" disabled>
+                        <input class="form-control" type="text" value="<?= (!empty($total_horas_computadas)) ? $total_horas_computadas : "N/A"  ?>" size="4" disabled>
                     </div>
                 </form>
             </div>

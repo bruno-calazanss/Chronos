@@ -41,37 +41,43 @@
 <nav class="col-8 col-sm-5 col-md-3 col-lg-2 bg-light sidebar d-none d-md-block">
     <ul class="nav flex-column pt-2">
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/dados_usr')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_usuario/dados_usr')?>">
                 <i class="far fa-id-card"></i>
                 <div>Meus dados</div>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/historico')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_relatorio/historico')?>">
                 <i class="fas fa-history"></i>
                 <div>Histórico</div>
             </a>
         </li>
+        <?php if($tipo == "AL"): ?>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/adicionar_relatorio')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_relatorio')?>">
                 <i class="fas fa-plus"></i>
                 <div>Adicionar relatório</div>
             </a>
         </li>
+        <?php endif; ?>
+        <?php if($tipo == "ADM"): ?>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/cadastrar_usr')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Usuario')?>">
                 <i class="fas fa-user-plus"></i>
                 <div>Cadastrar usuário</div>
             </a>
         </li>
+        <?php endif; ?>
+        <?php if($tipo == "C"): ?>
         <li class="nav-item">
             <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/avaliar')?>">
                 <i class="fas fa-check"></i>
                 <div>Avaliar</div>
             </a>
         </li>
+        <?php endif; ?>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/sair')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_usuario/sair')?>">
                 <i class="fas fa-sign-out-alt"></i>
                 <div>Sair</div>
             </a>

@@ -1,19 +1,46 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cadastrar_usr extends CI_Controller {
+class Controle_usuario extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->model(['usuario', 'DAO/usuario_dao']);
+        $this->load->model(['administrador', 'DAO/administrador_dao']);
+        $this->load->model(['aluno', 'DAO/aluno_dao']);
+        $this->load->model(['coordenador', 'DAO/coordenador_dao']);
     }
 
     public function index()
     {
+        if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado']) && $_SESSION['usr_autenticado']['tipo'] == "ADM") {
+            $this->load->view('templates/head');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar', $_SESSION['usr_autenticado']);
+            $this->load->view('cadastrar_usr');
+            $this->load->view('templates/scripts');
+            $this->load->view('templates/footer');
+        }
+        else {
+            redirect(base_url('index.php'));
+        }
+    }
+
+    function dados_usr() {
         if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado'])) {
             $this->load->view('templates/head');
             $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar');
-            $this->load->view('cadastrar_usr');
+            $this->load->view('templates/sidebar', $_SESSION['usr_autenticado']);
+
+            $dados['usuario'] = $this->usuario_dao->buscar('id', $this->session->usr_autenticado['id'])[0];
+            if($this->session->usr_autenticado['tipo'] == "AL") {
+                $dados['aluno'] = $this->aluno_dao->buscar('usuario_id', $this->session->usr_autenticado['id'])[0];
+                $dados['total_horas_computadas'] = $this->aluno_dao->total_horas_computadas($this->session->usr_autenticado['id']);
+            }
+            $dados['tipo'] = ($dados['usuario']->tipo == "ADM") ? "Administrador" : ($dados['usuario']->tipo == "AL") ? "Aluno" : "Coordenador";
+            
+            $this->load->view('dados_usr', $dados);
+
             $this->load->view('templates/scripts');
             $this->load->view('templates/footer');
         }
@@ -24,7 +51,7 @@ class Cadastrar_usr extends CI_Controller {
 
     function cadastrar() {
 
-        if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado'])) {
+        if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado']) && $_SESSION['usr_autenticado']['tipo'] == "ADM") {
             // $this->output->enable_profiler(TRUE);
 
             // VALIDATION RULES
@@ -86,6 +113,38 @@ class Cadastrar_usr extends CI_Controller {
         else {
             redirect(base_url('index.php'));
         }
+    }
+
+    function autenticar() {
+
+        // $this->output->enable_profiler(TRUE);
+
+        // VALIDATION RULES
+        $this->form_validation->set_rules('nome_usr', 'Nome de usuário', 'required');
+        // $this->form_validation->set_rules('senha', 'Senha', 'required|min_length[8]');
+        $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
+
+        if ($this->form_validation->run() == TRUE) {
+            
+            $usr = $this->usuario_dao->validar_acesso($this->input->post('nome_usr'), $this->input->post('senha'));
+            
+            if($usr === false) {
+                redirect(base_url('index.php'));
+            }
+
+            $this->session->usr_autenticado = (array) $usr;
+            
+            if($usr->tipo !== "ADM") {   
+                redirect(base_url('index.php/controle_usuario/dados_usr'));
+            }
+            redirect(base_url('index.php/controle_usuario/'));
+        }
+        redirect(base_url('index.php'));
+    }
+
+    function sair() {
+        $this->session->sess_destroy();
+        redirect(base_url('index.php'));
     }
 }
 

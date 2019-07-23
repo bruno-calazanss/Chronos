@@ -24,7 +24,7 @@
 <div class="container-fluid">
     <div class="row justify-content-end">
         <main role="main" class="col-md-9 col-lg-10 px-5 pt-5">
-            <form action="<?= base_url('index.php/adicionar_relatorio/adicionar') ?>" method="POST">
+            <form action="<?= base_url('index.php/controle_relatorio/enviar') ?>" method="POST">
                 <div class="table-responsive">
                     <table class="collection table table-bordered table-hover">
                         <thead class="font-weight-bold bg-light">

@@ -5,6 +5,16 @@
     .table tbody tr td {
         cursor: pointer;
     }
+
+    .table tbody tr td a {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .table tbody tr:hover td a {
+        font-weight: bold;
+    }
 </style>
 
 <div class="container-fluid">
@@ -23,10 +33,26 @@
                     <tbody>
                         <?php foreach($relatorios as $i => $relatorio): ?>
                         <tr>
-                            <td><?= ($relatorio->estado == 0) ? "Pendente" : "Avaliado" ?></td>
-                            <td><?= $relatorio->data ?></td>
-                            <td><?= $soma_horas_informadas[$i] ?></td>
-                            <td><?= ($soma_horas_validadas[$i] == '') ? 'Pendente' : $soma_horas_validadas[$i] ?></td>
+                            <td>
+                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
+                                    <?= ($relatorio->estado == 0) ? "Pendente" : "Avaliado" ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
+                                    <?= $relatorio->data ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
+                                  <?= $soma_horas_informadas[$i] ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
+                                   <?= ($soma_horas_validadas[$i] == '') ? 'Pendente' : $soma_horas_validadas[$i] ?>
+                                </a>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
