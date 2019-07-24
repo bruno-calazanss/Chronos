@@ -1,18 +1,19 @@
 <style scoped>
-    .table thead tr th {
-        vertical-align: middle;
-    }
+    
     .table tbody tr td {
+        padding: 0;
         cursor: pointer;
     }
 
     .table tbody tr td a {
         display: block;
+        padding: 0.75rem;
         text-decoration: none;
         color: inherit;
     }
 
     .table tbody tr:hover td a {
+        padding-right: 0;
         font-weight: bold;
     }
 </style>
@@ -24,6 +25,10 @@
                 <table class="collection table table-bordered table-hover">
                     <thead class="font-weight-bold bg-light">
                         <tr>
+                            <?php if($_SESSION['usr_autenticado']['tipo'] !== "AL"): ?>
+                            <th id="header_NomeAluno">Aluno</th>
+                            <th id="header_HorasValidadas">Matrícula</th>
+                            <?php endif; ?>
                             <th id="header_HorasValidadas">Estado atual</th>
                             <th id="header_Data">Data de criação</th>
                             <th id="header_HorasInformadas">Horas informadas</th>
@@ -33,6 +38,18 @@
                     <tbody>
                         <?php foreach($relatorios as $i => $relatorio): ?>
                         <tr>
+                            <?php if($_SESSION['usr_autenticado']['tipo'] !== "AL"): ?>
+                            <td>
+                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
+                                    <?= $alunos[$i]->nome ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
+                                    <?= $alunos[$i]->matricula ?>
+                                </a>
+                            </td>
+                            <?php endif; ?>
                             <td>
                                 <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
                                     <?= ($relatorio->estado == 0) ? "Pendente" : "Avaliado" ?>

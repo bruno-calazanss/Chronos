@@ -89,25 +89,25 @@
     </h6>
     <ul class="nav flex-column mb-2">
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/relatorio')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="#">
                 <i class="far fa-file-alt"></i>
                 <div>Relatório</div>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/relatorio')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="#">
                 <i class="far fa-file-alt"></i>
                 <div>Relatório</div>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/relatorio')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="#">
                 <i class="far fa-file-alt"></i>
                 <div>Relatório</div>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/relatorio')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="#">
                 <i class="far fa-file-alt"></i>
                 <div>Relatório</div>
             </a>

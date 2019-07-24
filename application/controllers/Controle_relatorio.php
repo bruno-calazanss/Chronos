@@ -36,10 +36,12 @@ class Controle_relatorio extends CI_Controller {
                 $dados['relatorios'] = $this->relatorio_dao->buscar('aluno_usuario_id', $this->session->usr_autenticado['id']);
             }
             else {
+                $this->load->model(['usuario', 'DAO/usuario_dao']);
                 $dados['relatorios'] = $this->relatorio_dao->listar();
             }
 
             for($i=0; $i<count($dados['relatorios']); $i++) {
+                $dados['alunos'][$i] = $this->usuario_dao->buscar('id', $dados['relatorios'][$i]->aluno_usuario_id)[0];
                 $dados['soma_horas_informadas'][$i] = $this->atividade_dao->somar_horas_informadas($dados['relatorios'][$i]->id);
                 $dados['soma_horas_validadas'][$i] = $this->atividade_dao->somar_horas_validadas($dados['relatorios'][$i]->id);
             }
@@ -86,6 +88,26 @@ class Controle_relatorio extends CI_Controller {
                 $this->db->trans_complete();
             }
             redirect(base_url('index.php/controle_relatorio'));
+        }
+        else {
+            redirect(base_url('index.php'));
+        }
+    }
+
+    function visualizar($id) {
+        if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado'])) {
+            $this->load->view('templates/head');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar', $_SESSION['usr_autenticado']);
+            $this->load->view('templates/scripts');
+
+            $this->load->model(['atividade', 'DAO/atividade_dao']);
+
+            $dados['atividades'] = $this->atividade_dao->buscar('relatorio_id', $id);
+            $dados['strings_categoria'] = Atividade::string_categorias;
+
+            $this->load->view('relatorio', $dados);
+            $this->load->view('templates/footer');
         }
         else {
             redirect(base_url('index.php'));

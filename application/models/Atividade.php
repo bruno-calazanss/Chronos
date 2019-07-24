@@ -12,6 +12,16 @@ class Atividade extends CI_Model {
     public $categoria;
     public $comprovante;
 
+    public const string_categorias = [10 => "Disciplinas não previstas", 
+                                      11 => "Cursos de atualização", 
+                                      12 => "Monitoria",
+                                      13 => "Estágio não-obrigatório", 
+                                      20 => "Eventos internos", 
+                                      21 => "Eventos externos", 
+                                      30 => "Iniciação científica (Tecnológica e Inovação)",
+                                      31 => "Publicações",
+                                      32 => "Apresentação de trabalho científico"];
+
     public static function Builder($id, $relatorio_id, $nome, $data, $qtd_horas, $categoria, $comprovante) {
         $atv = new Atividade();
         $atv->id = $id;

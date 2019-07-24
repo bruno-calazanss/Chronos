@@ -28,7 +28,8 @@ class Atividade_DAO extends CI_Model {
         $query = $this->db->get();
 
         foreach($query->result() as $i => $atv) {
-            $retAtividades[$i] = Atividade::Builder($atv->id, $atv->relatorio_id, $atv->nome, $atv->data, $atv->qtd_horas, $atv->comprovante);
+            $retAtividades[$i] = Atividade::Builder($atv->id, $atv->relatorio_id, $atv->nome, $atv->data, $atv->qtd_horas, 
+                                                    $atv->categoria, $atv->comprovante);
         }
         return $retAtividades; 
     }
@@ -56,7 +57,8 @@ class Atividade_DAO extends CI_Model {
         $query = $this->db->get();
 
         foreach($query->result() as $i => $atv) {
-            $retAtividades[$i] = Atividade::Builder($atv->id, $atv->relatorio_id, $atv->nome, $atv->data, $atv->qtd_horas, $atv->comprovante);
+            $retAtividades[$i] = Atividade::Builder($atv->id, $atv->relatorio_id, $atv->nome, $atv->data, $atv->qtd_horas, 
+                                                    $atv->categoria, $atv->comprovante);
             $retAtividades[$i]->set('horas_validadas', $atv->horas_validadas);
         }
         return $retAtividades; 
