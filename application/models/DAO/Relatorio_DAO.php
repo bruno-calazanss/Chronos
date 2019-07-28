@@ -23,6 +23,7 @@ class Relatorio_DAO extends CI_Model {
         $this->db->where($campo, $valor);
         $query = $this->db->get();
 
+        $retRelatorios = [];
         foreach($query->result() as $i => $relatorio) {
             $retRelatorios[$i] = Relatorio::Builder($relatorio->estado, $relatorio->data, $relatorio->coordenador_usuario_id, 
                                                    $relatorio->aluno_usuario_id);
@@ -31,7 +32,7 @@ class Relatorio_DAO extends CI_Model {
         return $retRelatorios; 
     }
 
-    function editar($campo_unico, $relatorio) {
+    function editar($relatorio) {
         $dados =    ['id' => $relatorio->id,
                     'data' => $relatorio->data,
                     'coordenador_usuario_id' => $relatorio->coordenador_usuario_id,
@@ -55,6 +56,13 @@ class Relatorio_DAO extends CI_Model {
             $retRelatorios[$i]->set('id', $relatorio->id);
         }
         return $retRelatorios; 
+    }
+
+    function avaliar($id, $coordenador_usuario_id) {
+        $this->db->where('id', $id);
+        $this->db->set('estado', 1);
+        $this->db->set('coordenador_usuario_id', $coordenador_usuario_id);
+        $this->db->update('relatorio');
     }
 }
 

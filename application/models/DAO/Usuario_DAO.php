@@ -79,6 +79,12 @@ class Usuario_DAO extends CI_Model {
         }
         return false;
     }
+
+    function mudarSenha($id, $senha) {
+        $this->db->where('id', $id);
+        $this->db->set('senha', $senha);
+        $this->db->update('usuario');
+    }
 }
 
 ?>

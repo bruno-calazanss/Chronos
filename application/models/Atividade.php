@@ -18,6 +18,7 @@ class Atividade extends CI_Model {
                                       13 => "Estágio não-obrigatório", 
                                       20 => "Eventos internos", 
                                       21 => "Eventos externos", 
+                                      22 => "Ministrar cursos de extensão", 
                                       30 => "Iniciação científica (Tecnológica e Inovação)",
                                       31 => "Publicações",
                                       32 => "Apresentação de trabalho científico"];

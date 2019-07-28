@@ -30,11 +30,12 @@ class Atividade_DAO extends CI_Model {
         foreach($query->result() as $i => $atv) {
             $retAtividades[$i] = Atividade::Builder($atv->id, $atv->relatorio_id, $atv->nome, $atv->data, $atv->qtd_horas, 
                                                     $atv->categoria, $atv->comprovante);
+            $retAtividades[$i]->set('horas_validadas', $atv->horas_validadas);
         }
         return $retAtividades; 
     }
 
-    function editar($campo_unico, $atv) {
+    function editar($atv) {
         $dados =    ['id' => $atv->id,
                      'relatorio_id' => $atv->relatorio_id,
                      'nome' => $atv->nome,

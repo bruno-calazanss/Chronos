@@ -8,7 +8,7 @@
         border-spacing: 2px;
     }
 
-    .table tbody tr td:last-child {
+    .table tbody tr .comprovante {
         text-align: center;
     }
 
@@ -32,6 +32,7 @@
                             <th>Categoria</th>
                             <th>Data</th>
                             <th>Qtd. de horas</th>
+                            <th>Horas validadas</th>
                             <th>Comprovante</th>
                         </tr>
                     </thead>
@@ -39,7 +40,7 @@
                         <?php foreach($atividades as $atv): ?>
                         <tr>
                             <td>
-                               <?= $atv->nome ?>
+                            <?= $atv->nome ?>
                             </td>
                             <td>
                                 <?= $strings_categoria[$atv->categoria] ?>
@@ -51,6 +52,9 @@
                                 <?= $atv->qtd_horas ?>
                             </td>
                             <td>
+                                <?= ($atv->horas_validadas != '') ? $atv->horas_validadas : "Pendente"; ?>
+                            </td>
+                            <td class="comprovante">
                                 <span class="btn btn-light fileinput-button px-3">
                                     <i class="fas fa-arrow-up"></i>
                                 </span>

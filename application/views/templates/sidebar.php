@@ -70,12 +70,18 @@
         <?php endif; ?>
         <?php if($tipo == "C"): ?>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Portal/avaliar')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_relatorio/relatorios_pendentes')?>">
                 <i class="fas fa-check"></i>
                 <div>Avaliar</div>
             </a>
         </li>
         <?php endif; ?>
+        <li class="nav-item">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_senha/modificar_senha')?>">
+                <i class="fas fa-key"></i>
+                <div>Modificar senha</div>
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_usuario/sair')?>">
                 <i class="fas fa-sign-out-alt"></i>

@@ -81,6 +81,59 @@ class Aluno_DAO extends CI_Model {
                $aluno->ev_internos + $aluno->ev_externos + $aluno->cursos_ext + $aluno->init_cientifica + $aluno->publicacoes + 
                $aluno->trab_cientifico;
     }
+
+    function atualizar_somatorios($usuario_id, $atividades) {
+        $aluno = $this->buscar('usuario_id', $usuario_id)[0];
+
+        $this->db->trans_start();
+        foreach($atividades as $atv) {
+            switch($atv->categoria) {
+                case 10: {
+                    $this->db->set('disc_nprevistas', $aluno->disc_nprevistas + $atv->horas_validadas);
+                    break;
+                }
+                case 11: {
+                    $this->db->set('cursos_atualizacao', $aluno->cursos_atualizacao + $atv->horas_validadas);
+                    break;
+                }
+                case 12: {
+                    $this->db->set('monitoria', $aluno->monitoria + $atv->horas_validadas);
+                    break;
+                }
+                case 13: {
+                    $this->db->set('estagio_nobrigatorio', $aluno->estagio_nobrigatorio + $atv->horas_validadas);
+                    break;
+                }
+                case 20: {
+                    $this->db->set('ev_internos', $aluno->ev_internos + $atv->horas_validadas);
+                    break;
+                }
+                case 21: {
+                    $this->db->set('ev_externos', $aluno->ev_externos + $atv->horas_validadas);
+                    break;
+                }
+                case 22: {
+                    $this->db->set('cursos_ext', $aluno->cursos_ext + $atv->horas_validadas);
+                    break;
+                }
+                case 30: {
+                    $this->db->set('init_cientifica', $aluno->init_cientifica + $atv->horas_validadas);
+                    break;
+                }
+                case 31: {
+                    $this->db->set('publicacoes', $aluno->publicacoes + $atv->horas_validadas);
+                    break;
+                }
+                case 32: {
+                    $this->db->set('trab_cientifico', $aluno->trab_cientifico + $atv->horas_validadas);
+                    break;
+                }
+            }
+            $this->db->where('usuario_id', $usuario_id);
+            $this->db->update('aluno');
+        }
+        $this->db->trans_complete();
+    }
 }
 
 ?>

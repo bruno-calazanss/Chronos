@@ -38,7 +38,7 @@
                             <input class="form-control" name="senha" placeholder="Senha" type="password" required>
                         </div>
                         <div class="m-0 ml-1 mb-3">
-                            <a href="">
+                            <a href="<?= base_url('index.php/controle_senha')?>">
                                 <u>Esqueceu sua senha?</u>
                             </a>
                         </div>
