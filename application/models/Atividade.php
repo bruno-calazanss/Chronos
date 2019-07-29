@@ -48,6 +48,51 @@ class Atividade extends CI_Model {
         return $this;
     }
 
+    public function enviarComprovantes($relatorio_id) {
+        if(!empty($_FILES['comprovante']['name'])) {
+            
+            $this->load->helper(['directory', 'path', 'file']);
+            
+            if(!is_dir(set_realpath('./comprovantes/' . $_SESSION['usr_autenticado']['matricula']))) {
+                mkdir(set_realpath('./comprovantes/' . $_SESSION['usr_autenticado']['matricula']));
+            }
+
+            if(is_dir(set_realpath('./comprovantes/' . $_SESSION['usr_autenticado']['matricula'] . "/$relatorio_id"))) {
+                delete_files('./comprovantes/' . $_SESSION['usr_autenticado']['matricula'] . "/$relatorio_id", TRUE);
+                rmdir(set_realpath('./comprovantes/' . $_SESSION['usr_autenticado']['matricula'] . "/$relatorio_id"));
+            }
+
+            mkdir(set_realpath('./comprovantes/' . $_SESSION['usr_autenticado']['matricula'] . "/$relatorio_id"));
+
+            $dadosArq = [];
+            foreach($_FILES['comprovante']['name'] as $i => $arq) {
+                if(empty($_FILES['comprovante']['name'][$i])) continue;
+
+                $_FILES['aux']['name']     = $_FILES['comprovante']['name'][$i];
+                $_FILES['aux']['type']     = $_FILES['comprovante']['type'][$i];
+                $_FILES['aux']['tmp_name'] = $_FILES['comprovante']['tmp_name'][$i];
+                $_FILES['aux']['error']     = $_FILES['comprovante']['error'][$i];
+                $_FILES['aux']['size']     = $_FILES['comprovante']['size'][$i];
+
+                $config['upload_path'] = './comprovantes/' . $_SESSION['usr_autenticado']['matricula'] . "/$relatorio_id";
+                $config['allowed_types'] = 'gif|jpg|jpeg|png|pdf|doc|docx|zip';
+                $config['max_size'] = 5120;
+                $config['file_ext_tolower'] = TRUE;
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                if($this->upload->do_upload('aux')) {
+                    $dadosArq[$i] = $this->upload->data();
+                }
+                else {
+                    return NULL;
+                }
+            }
+            return $dadosArq;
+        }
+        return NULL;
+    }
 }
 
 ?>

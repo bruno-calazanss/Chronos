@@ -16,6 +16,10 @@
         padding-right: 0;
         font-weight: bold;
     }
+
+    .paginacao a, .paginacao strong {
+        padding: 0 0.2rem 0 0;
+    }
 </style>
 
 <div class="container-fluid">
@@ -32,32 +36,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($relatorios as $i => $relatorio): ?>
+                        <?php for($i=--$pagina, $max=0; $i<count($relatorios) && $max<8; $i++, $max++): ?>
                         <tr>
                             <td>
-                                <a href="<?= base_url("index.php/controle_relatorio/avaliar/{$relatorio->id}")?>">
+                                <a href="<?= base_url("index.php/controle_relatorio/avaliar/{$relatorios[$i]->id}")?>">
                                     <?= $alunos[$i]->nome ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url("index.php/controle_relatorio/avaliar/{$relatorio->id}")?>">
+                                <a href="<?= base_url("index.php/controle_relatorio/avaliar/{$relatorios[$i]->id}")?>">
                                     <?= $alunos[$i]->matricula ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url("index.php/controle_relatorio/avaliar/{$relatorio->id}")?>">
-                                    <?= $relatorio->data ?>
+                                <a href="<?= base_url("index.php/controle_relatorio/avaliar/{$relatorios[$i]->id}")?>">
+                                    <?= date('d/m/Y', strtotime($relatorios[$i]->data)) ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url("index.php/controle_relatorio/avaliar/{$relatorio->id}")?>">
+                                <a href="<?= base_url("index.php/controle_relatorio/avaliar/{$relatorios[$i]->id}")?>">
                                   <?= $soma_horas_informadas[$i] ?>
                                 </a>
                             </td>
                         </tr>
-                        <?php endforeach; ?>
+                        <?php endfor; ?>
                     </tbody>
                 </table>
+            </div>
+            <div class="paginacao">
+                <?= $links ?>
             </div>
         </main>
     </div>

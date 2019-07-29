@@ -24,7 +24,7 @@
 <div class="container-fluid">
     <div class="row justify-content-end">
         <main role="main" class="col-md-9 col-lg-10 px-5">
-            <form action="<?= base_url('index.php/controle_relatorio/enviar') ?>" method="POST">
+            <form action="<?= base_url('index.php/controle_relatorio/enviar') ?>" method="POST" enctype="multipart/form-data">
                 <div class="table-responsive">
                     <table class="collection table table-bordered table-hover">
                         <thead class="font-weight-bold bg-light">
@@ -38,7 +38,7 @@
                         </thead>
                         <tbody>
                             <?php for($i=1; $i<=1; $i++): ?>
-                            <tr id="<?= "item$i" ?>">
+                            <tr id="<?= $i ?>">
                                 <td>
                                     <input class="form-control" type="text" size="50" name="nome[]" required>
                                 </td>
@@ -104,26 +104,27 @@
 <script src="<?= base_url('blueimp-file-upload/js/jquery.fileupload.js')?>"></script>
 <script>
     $(document).ready(function () {
-        $("input[type=file]").fileupload({
-            progressall: function (e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('.progress').css("visibility", "visible");
-                $('.progress-bar').css(
-                    'width',
-                    progress + '%'
-                );
-            },
-            stop: function (e, data) {
-                window.setTimeout(() => {
-                    $('.progress').css("visibility", "hidden");
-                    $('.progress-bar').css("width", "0%");
-                }, 2000);
-            }
-        });
+        // $("input[type=file]").fileupload({
+        //     singleFileUploads: false,
+        //     progressall: function (e, data) {
+        //         var progress = parseInt(data.loaded / data.total * 100, 10);
+        //         $('.progress').css("visibility", "visible");
+        //         $('.progress-bar').css(
+        //             'width',
+        //             progress + '%'
+        //         );
+        //     },
+        //     stop: function (e, data) {
+        //         window.setTimeout(() => {
+        //             $('.progress').css("visibility", "hidden");
+        //             $('.progress-bar').css("width", "0%");
+        //         }, 2000);
+        //     }
+        // });
         $(".btn-primary").on("click", function () {
             qtdItens = $("tr").length - 2;
-            item = $('#item' + qtdItens).clone().insertAfter('#item' + qtdItens);
-            $(item).attr("id", 'item' + (++qtdItens));
+            item = $('#' + qtdItens).clone().insertAfter('#' + qtdItens);
+            $(item).attr("id", (++qtdItens));
         });
     });
 </script>

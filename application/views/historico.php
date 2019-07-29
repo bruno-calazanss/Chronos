@@ -16,6 +16,10 @@
         padding-right: 0;
         font-weight: bold;
     }
+
+    .paginacao a, .paginacao strong {
+        padding: 0 0.2rem 0 0;
+    }
 </style>
 
 <div class="container-fluid">
@@ -36,44 +40,47 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($relatorios as $i => $relatorio): ?>
+                        <?php for($i=--$pagina, $max=0; $i<count($relatorios) && $max<8; $i++, $max++): ?>
                         <tr>
                             <?php if($_SESSION['usr_autenticado']['tipo'] !== "AL"): ?>
                             <td>
-                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
+                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorios[$i]->id}")?>">
                                     <?= $alunos[$i]->nome ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
+                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorios[$i]->id}")?>">
                                     <?= $alunos[$i]->matricula ?>
                                 </a>
                             </td>
                             <?php endif; ?>
                             <td>
-                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
-                                    <?= ($relatorio->estado == 0) ? "Pendente" : "Avaliado" ?>
+                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorios[$i]->id}")?>">
+                                    <?= ($relatorios[$i]->estado == 0) ? "Pendente" : "Avaliado" ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
-                                    <?= $relatorio->data ?>
+                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorios[$i]->id}")?>">
+                                    <?= date('d/m/Y', strtotime($relatorios[$i]->data)) ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
+                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorios[$i]->id}")?>">
                                   <?= $soma_horas_informadas[$i] ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorio->id}")?>">
+                                <a href="<?= base_url("index.php/controle_relatorio/visualizar/{$relatorios[$i]->id}")?>">
                                    <?= ($soma_horas_validadas[$i] == '') ? 'Pendente' : $soma_horas_validadas[$i] ?>
                                 </a>
                             </td>
                         </tr>
-                        <?php endforeach; ?>
+                        <?php endfor; ?>
                     </tbody>
                 </table>
+            </div>
+            <div class="paginacao">
+                <?= $links ?>
             </div>
         </main>
     </div>

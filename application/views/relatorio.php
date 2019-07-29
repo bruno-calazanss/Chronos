@@ -19,6 +19,10 @@
     .btn {
         border-radius: 0;
     }
+
+    .comprovante a {
+        text-decoration: underline;
+    }
 </style>
 
 <div class="container-fluid">
@@ -46,7 +50,7 @@
                                 <?= $strings_categoria[$atv->categoria] ?>
                             </td>
                             <td>
-                                <?= $atv->data ?>
+                                <?= date('d/m/Y', strtotime($atv->data)) ?>
                             </td>
                             <td>
                                 <?= $atv->qtd_horas ?>
@@ -55,9 +59,15 @@
                                 <?= ($atv->horas_validadas != '') ? $atv->horas_validadas : "Pendente"; ?>
                             </td>
                             <td class="comprovante">
-                                <span class="btn btn-light fileinput-button px-3">
-                                    <i class="fas fa-arrow-up"></i>
+                                <?php if($atv->comprovante == ''): ?>
+                                <span class="px-3">
+                                    Não enviado
                                 </span>
+                                <?php else: ?>
+                                <a href="<?= "http://localhost" . str_replace($_SERVER['DOCUMENT_ROOT'], "", $atv->comprovante); ?>" class="px-3" download>
+                                    Baixar
+                                </a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

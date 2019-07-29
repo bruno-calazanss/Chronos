@@ -24,7 +24,7 @@ class Controle_relatorio extends CI_Controller {
         }
     }
 
-    function historico() {
+    function historico($pagina = 1) {
         if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado'])) {
             // $this->output->enable_profiler(TRUE);
             
@@ -51,6 +51,18 @@ class Controle_relatorio extends CI_Controller {
                 $dados['soma_horas_validadas'][$i] = $this->atividade_dao->somar_horas_validadas($dados['relatorios'][$i]->id);
             }
             
+            $this->load->library('pagination');
+
+            $config['base_url'] = base_url("index.php/controle_relatorio/historico/");
+            $config['total_rows'] = count($dados['relatorios']);
+            $config['per_page'] = 8;
+            $config['num_links'] = 2;
+
+            $this->pagination->initialize($config);
+
+            $dados["links"] = $this->pagination->create_links();
+            $dados["pagina"] = $pagina;
+            
             $this->load->view('historico', $dados);
             
             $this->load->view('templates/scripts');
@@ -63,7 +75,6 @@ class Controle_relatorio extends CI_Controller {
     }
 
     function enviar() {
-
         if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado']) && $_SESSION['usr_autenticado']['tipo'] == "AL") {
             // $this->output->enable_profiler(TRUE);
 
@@ -76,18 +87,27 @@ class Controle_relatorio extends CI_Controller {
             $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
 
             if ($this->form_validation->run() == TRUE) {
-                $this->db->trans_start();
+                $this->db->trans_begin();
 
-                $relatorio = Relatorio::Builder('FALSE', date('d/m/Y'), NULL, $this->session->usr_autenticado['id']);
+                $relatorio = Relatorio::Builder('FALSE', date('Y-m-d'), NULL, $this->session->usr_autenticado['id']);
                 $id = $this->relatorio_dao->inserir($relatorio);
 
-                for($i = 0; $i < count($this->input->post('nome[]')); $i++) {
-                    $atv = Atividade::Builder($i+1, $id, $this->input->post('nome[]')[$i], $this->input->post('data[]')[$i], 
-                                            $this->input->post('horas[]')[$i], $this->input->post('categoria[]')[$i], 'teste');
-                    $this->atividade_dao->inserir($atv);
-                }
+                $uploads = $this->atividade->enviarComprovantes($id);
+                if(isset($uploads)) {    
+                    for($i = 0; $i < count($this->input->post('nome[]')); $i++) {
+                        $atv = Atividade::Builder($i+1, $id, $this->input->post('nome[]')[$i], $this->input->post('data[]')[$i], 
+                        $this->input->post('horas[]')[$i], $this->input->post('categoria[]')[$i], $uploads[$i]['full_path']);
+                        $this->atividade_dao->inserir($atv);
+                    }
 
-                $this->db->trans_complete();
+                    if($this->db->trans_status() === TRUE) {
+                        $this->db->trans_commit();
+                    } else {
+                        $this->db->trans_rollback();
+                    }
+                } else {
+                    $this->db->trans_rollback();
+                }
             }
             redirect(base_url('index.php/controle_relatorio'));
         }
@@ -133,7 +153,7 @@ class Controle_relatorio extends CI_Controller {
     }
 
     function avaliar($id) {
-        if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado'])) {
+        if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado']) && $_SESSION['usr_autenticado']['tipo'] == "C") {
             $this->load->view('templates/head');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar', $_SESSION['usr_autenticado']);
@@ -170,7 +190,7 @@ class Controle_relatorio extends CI_Controller {
         }
     }
 
-    function relatorios_pendentes() {
+    function relatorios_pendentes($pagina = 1) {
         if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado'] && $_SESSION['usr_autenticado']['tipo'] == "C")) {
             // $this->output->enable_profiler(TRUE);
             
@@ -186,6 +206,18 @@ class Controle_relatorio extends CI_Controller {
                 $dados['alunos'][$i] = $this->usuario_dao->buscar('id', $dados['relatorios'][$i]->aluno_usuario_id)[0];
                 $dados['soma_horas_informadas'][$i] = $this->atividade_dao->somar_horas_informadas($dados['relatorios'][$i]->id);
             }
+
+            $this->load->library('pagination');
+
+            $config['base_url'] = base_url("index.php/controle_relatorio/relatorios_pendentes/");
+            $config['total_rows'] = count($dados['relatorios']);
+            $config['per_page'] = 8;
+            $config['num_links'] = 2;
+
+            $this->pagination->initialize($config);
+
+            $dados["links"] = $this->pagination->create_links();
+            $dados["pagina"] = $pagina;
             
             $this->load->view('relatorios_pendentes', $dados);
             

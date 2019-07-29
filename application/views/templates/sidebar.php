@@ -90,7 +90,7 @@
         </li>
     </ul>
 
-    <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+    <!-- <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
         <div>Documentos recentes</div>
     </h6>
     <ul class="nav flex-column mb-2">
@@ -118,7 +118,7 @@
                 <div>Relatório</div>
             </a>
         </li>
-    </ul>
+    </ul> -->
 </nav>
 
 <script>
