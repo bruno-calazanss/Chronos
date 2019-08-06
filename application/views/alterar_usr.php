@@ -20,43 +20,39 @@
                     Formulário de cadastro
                 </div>
                 <div class="card-body">
-                    <form action="<?= base_url('index.php/controle_usuario/cadastrar')?>" method="POST">
+                    <form action="<?= base_url("index.php/controle_usuario/alterar/$usuario->id")?>" method="POST">
                         <div class="form-row">
                             <div class="form-group px-2 col-md-6">
                                 <label for="matricula">Matrícula:</label>
-                                <input type="text" class="form-control" id="matricula" name="matricula" 
-                                        placeholder="0000000000000" pattern="[0-9]{13}" required>
+                                <input type="text" class="form-control" id="matricula" name="matricula" value="<?= $usuario->matricula ?>" 
+                                        pattern="[0-9]{13}" required>
                             </div>
                             <div class="form-group px-2 col-md-6">
                                 <label for="tipo">Tipo:</label>
-                                <select id="tipo" name="tipo" class="form-control" required>
-                                    <option disabled selected hidden></option>
-                                    <option value="AL">Aluno</option>
-                                    <option value="C">Coordenador</option>
-                                </select>
+                                <input type="text" class="form-control" id="tipo" name="tipo" value="<?= $tipo ?>" disabled>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group px-2 col-md-6">
                                 <label for="nome">Nome:</label>
-                                <input type="text" class="form-control" id="nome" name="nome" required>
+                                <input type="text" class="form-control" id="nome" name="nome" value="<?= $usuario->nome ?>" required>
                             </div>
                             <div class="form-group px-2 col-md-6">
                                 <label for="nome_usr">Nome de usuário:</label>
-                                <input type="text" class="form-control" id="nome_usr" name="nome_usr" required>
+                                <input type="text" class="form-control" id="nome_usr" name="nome_usr" value="<?= $usuario->nome_usr ?>" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group px-2 col-md-6">
                                 <label for="email">E-mail:</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@email.com" required>
+                                <input type="email" class="form-control" id="email" name="email" value="<?= $usuario->email ?>" required>
                             </div>
                             <div class="form-group px-2 col-md-6">
                                 <label for="conf_email">Confirmação de e-mail:</label>
-                                <input type="email" class="form-control" id="conf_email" name="conf_email" placeholder="exemplo@email.com" required>
+                                <input type="email" class="form-control" id="conf_email" name="conf_email" value="<?= $usuario->email ?>" required>
                             </div>
                         </div>
-                        <button type="submit" class="d-block mx-auto btn btn-primary">Cadastrar</button>
+                        <button type="submit" class="d-block mx-auto btn btn-primary">Enviar alterações</button>
                     </form>
                 </div>
             </div>

@@ -40,12 +40,14 @@
 
 <nav class="col-8 col-sm-5 col-md-3 col-lg-2 bg-light sidebar d-none d-md-block">
     <ul class="nav flex-column pt-2">
+        <?php if($id != 0): ?>
         <li class="nav-item">
             <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_usuario/dados_usr')?>">
                 <i class="far fa-id-card"></i>
                 <div>Meus dados</div>
             </a>
         </li>
+        <?php endif; ?>
         <li class="nav-item">
             <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_relatorio/historico')?>">
                 <i class="fas fa-history"></i>
@@ -62,9 +64,15 @@
         <?php endif; ?>
         <?php if($tipo == "ADM"): ?>
         <li class="nav-item">
-            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Usuario')?>">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_usuario/')?>">
                 <i class="fas fa-user-plus"></i>
                 <div>Cadastrar usuário</div>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_usuario/listar_usuarios')?>">
+                <i class="fas fa-users"></i>
+                <div>Gerenciar usuários</div>
             </a>
         </li>
         <?php endif; ?>
@@ -73,6 +81,12 @@
             <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_relatorio/relatorios_pendentes')?>">
                 <i class="fas fa-check"></i>
                 <div>Avaliar</div>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_usuario/listar_usuarios')?>">
+                <i class="fas fa-users"></i>
+                <div>Visualizar alunos</div>
             </a>
         </li>
         <?php endif; ?>

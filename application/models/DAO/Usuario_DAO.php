@@ -85,6 +85,27 @@ class Usuario_DAO extends CI_Model {
         $this->db->set('senha', $senha);
         $this->db->update('usuario');
     }
+
+    function alterar_dados($id, $matricula, $email, $nome, $nome_usr) {
+        $this->db->where('id', $id);
+        $this->db->set('matricula', $matricula);
+        $this->db->set('email', $email);
+        $this->db->set('nome', $nome);
+        $this->db->set('nome_usr', $nome_usr);
+        $this->db->update('usuario');
+    }
+
+    function desativar($id) {
+        $this->db->where('id', $id);
+        $this->db->set('status', FALSE);
+        $this->db->update('usuario');
+    }
+
+    function ativar($id) {
+        $this->db->where('id', $id);
+        $this->db->set('status', TRUE);
+        $this->db->update('usuario');
+    }
 }
 
 ?>

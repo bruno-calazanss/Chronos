@@ -51,7 +51,7 @@
                     </div>
                 </form>
             </div>
-            <?php if($_SESSION['usr_autenticado']['tipo'] == "AL"): ?>
+            <?php if($usuario->tipo == "AL"): ?>
             <div class="table-responsive mt-4">
                 <table class="collection table table-bordered">
                     <thead class="font-weight-bold bg-light">

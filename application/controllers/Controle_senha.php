@@ -12,10 +12,13 @@ class Controle_senha extends CI_Controller {
     }
 
     public function index() {
-        if(!isset($_SESSION['usr_autenticado']) || empty($_SESSION['usr_autenticado'])) {
+        if(!isset($_SESSION['usr_autenticado'])) {
             $this->load->view('templates/head');
             $this->load->view('redefinir_senha');
             $this->load->view('templates/scripts');
+            if(isset($_SESSION['status']) && isset($_SESSION['msg'])) {
+                $this->load->view('templates/msg_sucesso', $_SESSION);
+            }
             $this->load->view('templates/footer');
         }
         else {
@@ -27,7 +30,7 @@ class Controle_senha extends CI_Controller {
         if(isset($_POST['email']) && !empty($_POST['email'])) {
             $usr = $this->usuario_dao->buscar('email', $_POST['email'])[0];
             if($usr) {
-                $this->output->enable_profiler(TRUE);
+                // $this->output->enable_profiler(TRUE);
 
                 $this->load->helper('string');
                 $novaSenha = random_string('alnum', 10);
@@ -47,9 +50,14 @@ class Controle_senha extends CI_Controller {
                     
                     $this->email->send();
                     // $this->email->print_debugger();
+
+                    $this->session->set_flashdata(["status" => TRUE, "msg" => "Senha redefinida com sucesso! <br> Uma senha temporária foi enviada para o e-mail especificado."]);
+                    redirect(base_url('index.php/controle_senha'));
+                } 
+                else {
+                    redirect(base_url('index.php'));
                 }
             }
-            redirect(base_url('index.php'));
         }
     }
 
@@ -60,6 +68,9 @@ class Controle_senha extends CI_Controller {
             $this->load->view('templates/sidebar', $_SESSION['usr_autenticado']);
             $this->load->view('modificar_senha');
             $this->load->view('templates/scripts');
+            if(isset($_SESSION['status']) && isset($_SESSION['msg'])) {
+                $this->load->view('templates/msg_sucesso', $_SESSION);
+            }
             $this->load->view('templates/footer');
         }
         else {
@@ -103,7 +114,8 @@ class Controle_senha extends CI_Controller {
                     // $this->email->print_debugger();
                 }
             }
-            redirect(base_url('index.php/controle_senha/modificar_senha'));
+            $this->session->set_flashdata(["status" => TRUE, "msg" => "Senha modificada com sucesso!"]);
+            redirect(base_url('index.php/controle_senha/modificar_senha/modificar_senha'));
         }
         else {
             redirect(base_url('index.php'));

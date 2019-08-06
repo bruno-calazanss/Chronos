@@ -40,7 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php for($i=--$pagina, $max=0; $i<count($relatorios) && $max<8; $i++, $max++): ?>
+                        <?php for($i=count($relatorios)-$pagina, $max=0; $i>=0 && $max<8; $i--, $max++): ?>
                         <tr>
                             <?php if($_SESSION['usr_autenticado']['tipo'] !== "AL"): ?>
                             <td>

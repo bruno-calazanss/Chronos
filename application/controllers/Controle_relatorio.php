@@ -15,8 +15,11 @@ class Controle_relatorio extends CI_Controller {
             $this->load->view('templates/head', ['fileUpload' => true]);
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar', $_SESSION['usr_autenticado']);
-            $includes['scripts'] = $this->load->view('templates/scripts', NULL, TRUE);
-            $this->load->view('adicionar_relatorio', $includes);
+            $this->load->view('templates/scripts');
+            $this->load->view('adicionar_relatorio');
+            if(isset($_SESSION['status']) && isset($_SESSION['msg'])) {
+                $this->load->view('templates/msg_sucesso', $_SESSION);
+            }
             $this->load->view('templates/footer');
         }
         else {
@@ -102,6 +105,7 @@ class Controle_relatorio extends CI_Controller {
 
                     if($this->db->trans_status() === TRUE) {
                         $this->db->trans_commit();
+                        $this->session->set_flashdata(["status" => TRUE, "msg" => "Relatório enviado com sucesso!"]);
                     } else {
                         $this->db->trans_rollback();
                     }
@@ -143,9 +147,10 @@ class Controle_relatorio extends CI_Controller {
                 
                 $this->relatorio_dao->avaliar($id, $this->session->usr_autenticado['id']);
 
+                $this->session->set_flashdata(["status" => TRUE, "msg" => "Avaliação enviada com sucesso!"]);
                 $this->db->trans_complete();
             }
-            redirect(base_url('index.php/controle_relatorio/historico'));
+            redirect(base_url('index.php/controle_relatorio/relatorios_pendentes'));
         }
         else {
             redirect(base_url('index.php'));
@@ -222,6 +227,9 @@ class Controle_relatorio extends CI_Controller {
             $this->load->view('relatorios_pendentes', $dados);
             
             $this->load->view('templates/scripts');
+            if(isset($_SESSION['status']) && isset($_SESSION['msg'])) {
+                $this->load->view('templates/msg_sucesso', $_SESSION);
+            }
             $this->load->view('templates/footer');
 
         }

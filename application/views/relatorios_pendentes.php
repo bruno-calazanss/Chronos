@@ -36,7 +36,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php for($i=--$pagina, $max=0; $i<count($relatorios) && $max<8; $i++, $max++): ?>
+                        <?php for($i=count($relatorios)-$pagina, $max=0; $i>=0 && $max<8; $i--, $max++): ?>
                         <tr>
                             <td>
                                 <a href="<?= base_url("index.php/controle_relatorio/avaliar/{$relatorios[$i]->id}")?>">
