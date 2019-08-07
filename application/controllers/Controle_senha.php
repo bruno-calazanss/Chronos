@@ -46,7 +46,7 @@ class Controle_senha extends CI_Controller {
                     $this->email->from('smtp@smtp.com', 'smtp');
                     
                     $this->email->subject('Chronos - Senha redefinida');
-                    $this->email->message("Sua senha foi redefinida. <br> Senha temporária: {$usr->senha}");
+                    $this->email->message("Sua senha foi redefinida. <br> Senha temporária: $novaSenha");
                     
                     $this->email->send();
                     // $this->email->print_debugger();
