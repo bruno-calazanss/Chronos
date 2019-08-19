@@ -11,14 +11,13 @@ class Coordenador_DAO extends CI_Model {
     function inserir($coordenador) {
         $dados = ['usuario_id' => $coordenador->usuario_id];
         $this->db->insert('coordenador', $dados);
+        return $this->db->insert_id();
     }
 
     function buscar($campo, $valor) {
-        $this->db->select('*');
-        $this->db->from('coordenador');
-        $this->db->where($campo, $valor);
-        $query = $this->db->get();
+        $query = $this->db->where($campo, $valor)->get('coordenador');
 
+        $retCoordenadores = [];
         foreach($query->result() as $i => $coordenador) {
             $retCoordenadores[$i] = Coordenador::Builder($coordenador->id);
         }
@@ -27,20 +26,17 @@ class Coordenador_DAO extends CI_Model {
 
     function editar($coordenador) {
         $dados = ['usuario_id' => $coordenador->usuario_id];
-        $this->db->replace('coordenador', $dados);
-        
+        return $this->db->replace('coordenador', $dados); 
     }
 
     function remover($usuario_id) {
-        $this->db->where('usuario_id', $usuario_id);
-        $this->db->delete('coordenador');
+        return $this->db->where('usuario_id', $usuario_id)->delete('coordenador');
     }
 
     function listar() {
-        $this->db->select('*');
-        $this->db->from('coordenador');
-        $query = $this->db->get();
+        $query = $this->db->get('coordenador');
 
+        $retCoordenadores = [];
         foreach($query->result() as $i => $coordenador) {
             $retCoordenadores[$i] = Coordenador::Builder($coordenador->id);
         }

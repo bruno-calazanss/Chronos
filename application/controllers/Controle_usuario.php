@@ -20,7 +20,12 @@ class Controle_usuario extends CI_Controller {
             $this->load->view('cadastrar_usr');
             $this->load->view('templates/scripts');
             if(isset($_SESSION['status']) && isset($_SESSION['msg'])) {
-                $this->load->view('templates/msg_sucesso', $_SESSION);
+                if($_SESSION['status']) {   
+                    $this->load->view('templates/msg_sucesso', $_SESSION);
+                }
+                else {
+                    $this->load->view('templates/msg_erro', $_SESSION);
+                }
             }
             $this->load->view('templates/footer');
         }
@@ -55,8 +60,12 @@ class Controle_usuario extends CI_Controller {
 
     function desativar($id) {
         if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado']) && $_SESSION['usr_autenticado']['tipo'] == "ADM") {
-            $this->usuario_dao->desativar($id);
-            $this->session->set_flashdata(["status" => TRUE, "msg" => "Usuário desativado com sucesso!"]);
+            if($this->usuario_dao->desativar($id)) {
+                $this->session->set_flashdata(["status" => TRUE, "msg" => "Usuário desativado com sucesso!"]);
+            }
+            else {
+                $this->session->set_flashdata(["status" => FALSE, "msg" => "Usuário não desativado! Um erro desconhecido impediu a desativação do usuário."]);
+            }
             redirect(base_url('index.php/controle_usuario/listar_usuarios'));
         }
         else {
@@ -66,8 +75,12 @@ class Controle_usuario extends CI_Controller {
     
     function ativar($id) {
         if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado']) && $_SESSION['usr_autenticado']['tipo'] == "ADM") {
-            $this->usuario_dao->ativar($id);
-            $this->session->set_flashdata(["status" => TRUE, "msg" => "Usuário ativado com sucesso!"]);
+            if($this->usuario_dao->ativar($id)) {
+                $this->session->set_flashdata(["status" => TRUE, "msg" => "Usuário reativado com sucesso!"]);
+            }
+            else {
+                $this->session->set_flashdata(["status" => FALSE, "msg" => "Usuário não reativado! Um erro desconhecido impediu a reativação do usuário."]);
+            }
             redirect(base_url('index.php/controle_usuario/listar_usuarios'));
         }
         else {
@@ -83,6 +96,8 @@ class Controle_usuario extends CI_Controller {
 
             if($_SESSION['usr_autenticado']['tipo'] == "ADM") {   
                 $dados['usuarios'] = $this->usuario_dao->listar();
+                unset($dados['usuarios'][0]);
+                $dados['usuarios'] = array_values($dados['usuarios']);
             }
             else {
                 $dados['usuarios'] = $this->usuario_dao->buscar('tipo', "AL");
@@ -115,7 +130,12 @@ class Controle_usuario extends CI_Controller {
             $this->load->view('listar_usuarios', $dados);
             
             if(isset($_SESSION['status']) && isset($_SESSION['msg'])) {
-                $this->load->view('templates/msg_sucesso', $_SESSION);
+                if($_SESSION['status']) {   
+                    $this->load->view('templates/msg_sucesso', $_SESSION);
+                }
+                else {
+                    $this->load->view('templates/msg_erro', $_SESSION);
+                }
             }
             $this->load->view('templates/footer');
         }
@@ -133,9 +153,18 @@ class Controle_usuario extends CI_Controller {
             $dados['usuario'] = $this->usuario_dao->buscar('id', $id)[0];
             $dados['tipo'] = ($dados['usuario']->tipo == "ADM") ? "Administrador" : ($dados['usuario']->tipo == "AL") ? "Aluno" : "Coordenador";
             
+            $this->load->view('templates/scripts');
             $this->load->view('alterar_usr', $dados);
 
-            $this->load->view('templates/scripts');
+            if(isset($_SESSION['status']) && isset($_SESSION['msg'])) {
+                if($_SESSION['status']) {   
+                    $this->load->view('templates/msg_sucesso', $_SESSION);
+                }
+                else {
+                    $this->load->view('templates/msg_erro', $_SESSION);
+                }
+            }
+
             $this->load->view('templates/footer');
         }
         else {
@@ -145,22 +174,22 @@ class Controle_usuario extends CI_Controller {
 
     function alterar($id) {
         if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado']) && $_SESSION['usr_autenticado']['tipo'] == "ADM") {
-            // $this->output->enable_profiler(TRUE);
-
-            // VALIDATION RULES
-            $this->form_validation->set_rules('matricula', 'Matrícula', 'required|numeric|min_length[13]');
+            $this->form_validation->set_rules('matricula', 'Matrícula', 'required|numeric|min_length[1]|max_length[13]');
             $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|max_length[70]');
             $this->form_validation->set_rules('conf_email', 'Confirmação de e-mail', 'required|matches[email]');
             $this->form_validation->set_rules('nome', 'Nome', 'required|max_length[80]');
-            $this->form_validation->set_rules('nome_usr', 'Nome de usuário', 'required');
-            $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
 
             if ($this->form_validation->run() == TRUE) {
-                $this->usuario_dao->alterar_dados($id, $this->input->post('matricula'), $this->input->post('email'),
-                                                    $this->input->post('nome'), $this->input->post('nome_usr'));
+                $status = $this->usuario_dao->alterar_dados($id, $this->input->post('matricula'), $this->input->post('email'),
+                                                            $this->input->post('nome'), $this->input->post('nome_usr'));
+                if($status) {
+                    $this->session->set_flashdata(["status" => TRUE, "msg" => "Dados atualizados com sucesso!"]);
+                    redirect(base_url('index.php/controle_usuario/listar_usuarios'));
+                }
+                $this->session->set_flashdata(["status" => FALSE, "msg" => "Dados não alterados! Um erro desconhecido impediu a alteração dos dados de usuário."]);
+                redirect(base_url('index.php/controle_usuario/listar_usuarios'));
             }
-
-            $this->session->set_flashdata(["status" => TRUE, "msg" => "Dados atualizados com sucesso!"]);
+            $this->session->set_flashdata(["status" => FALSE, "msg" => "Erro de validação: o campo de confirmação não coincide com o novo e-mail informado."]);
             redirect(base_url('index.php/controle_usuario/listar_usuarios'));
         }
         else {
@@ -170,22 +199,18 @@ class Controle_usuario extends CI_Controller {
 
     function cadastrar() {
         if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado']) && $_SESSION['usr_autenticado']['tipo'] == "ADM") {
-            // $this->output->enable_profiler(TRUE);
-
-            // VALIDATION RULES
-            $this->form_validation->set_rules('matricula', 'Matrícula', 'required|numeric|min_length[13]');
+            $this->form_validation->set_rules('matricula', 'Matrícula', 'required|numeric');
             $this->form_validation->set_rules('tipo', 'Tipo', 'required');
             $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|max_length[70]');
             $this->form_validation->set_rules('conf_email', 'Confirmação de e-mail', 'required|matches[email]');
             $this->form_validation->set_rules('nome', 'Nome', 'required|max_length[80]');
             $this->form_validation->set_rules('nome_usr', 'Nome de usuário', 'required');
-            $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
 
             if ($this->form_validation->run() == TRUE) {
                 $this->load->model(['usuario', 'DAO/usuario_dao']);
                 $this->load->helper('string');
 
-                $this->db->trans_start();
+                $this->db->trans_begin();
                 
                 $usr = Usuario::Builder($this->input->post('nome'), $this->input->post('matricula'), $this->input->post('email'), 
                                         $this->input->post('nome_usr'), $this->input->post('tipo'), TRUE);
@@ -210,7 +235,6 @@ class Controle_usuario extends CI_Controller {
                         break;
                     }
                 }
-                $this->db->trans_complete();
 
                 if ($this->db->trans_status() === TRUE)
                 {
@@ -222,12 +246,18 @@ class Controle_usuario extends CI_Controller {
                     $this->email->subject('Chronos - Senha temporária');
                     $this->email->message("Cadastro concluído! <br> Usuário: {$usr->nome_usr} <br> Senha temporária: {$usr->senha}");
                     
-                    $this->email->send();
-                    // $this->email->print_debugger();
-                    $this->session->set_flashdata(["status" => TRUE, "msg" => "Usuário cadastrado com sucesso!"]);
+                    if($this->email->send()) {
+                        $this->db->trans_commit();
+                        $this->session->set_flashdata(["status" => TRUE, "msg" => "Usuário cadastrado com sucesso!"]);
+                        redirect(base_url('index.php/controle_usuario/'));
+                    }
+                    $this->db->trans_rollback();
+                    $this->session->set_flashdata(["status" => FALSE, "msg" => "Usuário não cadastrado! Um erro ocorreu no envio do e-mail de confirmação de cadastro."]);
+                    redirect(base_url('index.php/controle_usuario/'));
                 }
+                $this->session->set_flashdata(["status" => FALSE, "msg" => "Usuário não cadastrado! Um erro desconhecido impediu o cadastro do usuário."]);
+                redirect(base_url('index.php/controle_usuario/'));
             }
-            redirect(base_url('index.php/controle_usuario/'));
         }
         else {
             redirect(base_url('index.php'));
@@ -235,27 +265,21 @@ class Controle_usuario extends CI_Controller {
     }
 
     function autenticar() {
-        // $this->output->enable_profiler(TRUE);
-
-        // VALIDATION RULES
         $this->form_validation->set_rules('nome_usr', 'Nome de usuário', 'required');
-        // $this->form_validation->set_rules('senha', 'Senha', 'required|min_length[8]');
-        $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
+        $this->form_validation->set_rules('senha', 'Senha', 'required|min_length[8]');
 
-        if ($this->form_validation->run() == TRUE) {
-            
+        if ($this->form_validation->run() == TRUE) { 
             $usr = $this->usuario_dao->validar_acesso($this->input->post('nome_usr'), $this->input->post('senha'));
             
             if($usr === false) {
+                $this->session->set_flashdata(["status" => FALSE, "msg" => "Usuário e/ou senha incorreto(s)."]);
                 redirect(base_url('index.php'));
             }
 
             $this->session->usr_autenticado = (array) $usr;
-            
-            if($usr->tipo !== "ADM") {   
-                redirect(base_url('index.php/controle_usuario/dados_usr'));
-            }
-            redirect(base_url('index.php/controle_usuario/'));
+        }
+        else {
+            $this->session->set_flashdata(["status" => FALSE, "msg" => "Usuário e/ou senha incorreto(s)!"]);
         }
         redirect(base_url('index.php'));
     }

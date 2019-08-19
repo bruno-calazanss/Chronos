@@ -93,7 +93,7 @@
         <li class="nav-item">
             <a class="nav-link p-0 ml-3 my-2" href="<?= base_url('index.php/Controle_senha/modificar_senha')?>">
                 <i class="fas fa-key"></i>
-                <div>Modificar senha</div>
+                <div>Alterar senha</div>
             </a>
         </li>
         <li class="nav-item">

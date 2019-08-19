@@ -24,8 +24,8 @@
                         <div class="form-row">
                             <div class="form-group px-2 col-md-6">
                                 <label for="matricula">Matrícula:</label>
-                                <input type="text" class="form-control" id="matricula" name="matricula" 
-                                        placeholder="0000000000000" pattern="[0-9]{13}" required>
+                                <input type="text" class="form-control" id="matricula" name="matricula" pattern="[0-9]{1,13}" required>
+                                <small class="form-text text-muted ml-1">Ex: 0000000000000</small>
                             </div>
                             <div class="form-group px-2 col-md-6">
                                 <label for="tipo">Tipo:</label>
@@ -38,22 +38,24 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group px-2 col-md-6">
-                                <label for="nome">Nome:</label>
+                                <label for="nome">Nome completo:</label>
                                 <input type="text" class="form-control" id="nome" name="nome" required>
                             </div>
                             <div class="form-group px-2 col-md-6">
-                                <label for="nome_usr">Nome de usuário:</label>
+                                <label for="nome_usr">Login do usuário:</label>
                                 <input type="text" class="form-control" id="nome_usr" name="nome_usr" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group px-2 col-md-6">
                                 <label for="email">E-mail:</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@email.com" required>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                                <small class="form-text text-muted ml-1">Ex: exemplo@email.com</small>
                             </div>
                             <div class="form-group px-2 col-md-6">
                                 <label for="conf_email">Confirmação de e-mail:</label>
-                                <input type="email" class="form-control" id="conf_email" name="conf_email" placeholder="exemplo@email.com" required>
+                                <input type="email" class="form-control" id="conf_email" name="conf_email" required>
+                                <small class="form-text text-muted ml-1">Ex: exemplo@email.com</small>
                             </div>
                         </div>
                         <button type="submit" class="d-block mx-auto btn btn-primary">Cadastrar</button>

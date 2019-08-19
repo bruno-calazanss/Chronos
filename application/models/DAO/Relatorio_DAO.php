@@ -18,10 +18,7 @@ class Relatorio_DAO extends CI_Model {
     }
 
     function buscar($campo, $valor) {
-        $this->db->select('*');
-        $this->db->from('relatorio');
-        $this->db->where($campo, $valor);
-        $query = $this->db->get();
+        $query = $this->db->where($campo, $valor)->get('relatorio');
 
         $retRelatorios = [];
         foreach($query->result() as $i => $relatorio) {
@@ -37,19 +34,17 @@ class Relatorio_DAO extends CI_Model {
                     'data' => $relatorio->data,
                     'coordenador_usuario_id' => $relatorio->coordenador_usuario_id,
                     'aluno_usuario_id' => $relatorio->aluno_usuario_id];
-        $this->db->replace('relatorio', $dados);
+        return $this->db->replace('relatorio', $dados);
     }
 
     function remover($campo_unico, $valor) {
-        $this->db->where($campo_unico, $valor);
-        $this->db->delete('relatorio');
+        return $this->db->where($campo_unico, $valor)->delete('relatorio');
     }
 
     function listar() {
-        $this->db->select('*');
-        $this->db->from('relatorio');
-        $query = $this->db->get();
+        $query = $this->db->get('relatorio');
 
+        $retRelatorios = [];
         foreach($query->result() as $i => $relatorio) {
             $retRelatorios[$i] = Relatorio::Builder($relatorio->estado, $relatorio->data, $relatorio->coordenador_usuario_id, 
                                                    $relatorio->aluno_usuario_id);
@@ -59,10 +54,7 @@ class Relatorio_DAO extends CI_Model {
     }
 
     function avaliar($id, $coordenador_usuario_id) {
-        $this->db->where('id', $id);
-        $this->db->set('estado', 1);
-        $this->db->set('coordenador_usuario_id', $coordenador_usuario_id);
-        $this->db->update('relatorio');
+        return $this->db->where('id', $id)->set('estado', 1)->set('coordenador_usuario_id', $coordenador_usuario_id)->update('relatorio');
     }
 }
 

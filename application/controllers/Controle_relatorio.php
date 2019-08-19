@@ -18,7 +18,12 @@ class Controle_relatorio extends CI_Controller {
             $this->load->view('templates/scripts');
             $this->load->view('adicionar_relatorio');
             if(isset($_SESSION['status']) && isset($_SESSION['msg'])) {
-                $this->load->view('templates/msg_sucesso', $_SESSION);
+                if($_SESSION['status']) {   
+                    $this->load->view('templates/msg_sucesso', $_SESSION);
+                }
+                else {
+                    $this->load->view('templates/msg_erro', $_SESSION);
+                }
             }
             $this->load->view('templates/footer');
         }
@@ -86,8 +91,6 @@ class Controle_relatorio extends CI_Controller {
             $this->form_validation->set_rules('categoria[]', 'Categoria', 'required|max_length[45]');
             $this->form_validation->set_rules('data[]', 'Data', 'required');
             $this->form_validation->set_rules('horas[]', 'Qtd. de horas informadas', 'required|greater_than[0]|is_numeric');
-            // $this->form_validation->set_rules('comprovante[]', 'Comprovante', 'required');
-            $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
 
             if ($this->form_validation->run() == TRUE) {
                 $this->db->trans_begin();
@@ -108,9 +111,11 @@ class Controle_relatorio extends CI_Controller {
                         $this->session->set_flashdata(["status" => TRUE, "msg" => "Relatório enviado com sucesso!"]);
                     } else {
                         $this->db->trans_rollback();
+                        $this->session->set_flashdata(["status" => FALSE, "msg" => "Relatório não enviado! Um erro desconhecido impediu o envio do relatório."]);
                     }
                 } else {
                     $this->db->trans_rollback();
+                    $this->session->set_flashdata(["status" => FALSE, "msg" => "Relatório não enviado! Um erro ocorreu durante o envio dos comprovantes."]);
                 }
             }
             redirect(base_url('index.php/controle_relatorio'));
@@ -146,10 +151,15 @@ class Controle_relatorio extends CI_Controller {
                 $this->aluno_dao->atualizar_somatorios($relatorio->aluno_usuario_id, $atividades);
                 
                 $this->relatorio_dao->avaliar($id, $this->session->usr_autenticado['id']);
-
-                $this->session->set_flashdata(["status" => TRUE, "msg" => "Avaliação enviada com sucesso!"]);
+                
                 $this->db->trans_complete();
+                
+                if(!$this->db->trans_status()) {
+                    $this->session->set_flashdata(["status" => FALSE, "msg" => "Avaliação não enviada! Um erro desconhecido impediu o envio da avaliação."]);
+                    redirect($_SERVER['HTTP_REFERER']);
+                }
             }
+            $this->session->set_flashdata(["status" => TRUE, "msg" => "Avaliação enviada com sucesso!"]);
             redirect(base_url('index.php/controle_relatorio/relatorios_pendentes'));
         }
         else {
@@ -168,6 +178,15 @@ class Controle_relatorio extends CI_Controller {
             $dados['atividades'] = $this->atividade_dao->buscar('relatorio_id', $id);
             $dados['strings_categoria'] = Atividade::string_categorias;
             $this->load->view('avaliar', $dados);
+
+            if(isset($_SESSION['status']) && isset($_SESSION['msg'])) {
+                if($_SESSION['status']) {   
+                    $this->load->view('templates/msg_sucesso', $_SESSION);
+                }
+                else {
+                    $this->load->view('templates/msg_erro', $_SESSION);
+                }
+            }
 
             $this->load->view('templates/footer');
         }
@@ -228,7 +247,12 @@ class Controle_relatorio extends CI_Controller {
             
             $this->load->view('templates/scripts');
             if(isset($_SESSION['status']) && isset($_SESSION['msg'])) {
-                $this->load->view('templates/msg_sucesso', $_SESSION);
+                if($_SESSION['status']) {   
+                    $this->load->view('templates/msg_sucesso', $_SESSION);
+                }
+                else {
+                    $this->load->view('templates/msg_erro', $_SESSION);
+                }
             }
             $this->load->view('templates/footer');
 

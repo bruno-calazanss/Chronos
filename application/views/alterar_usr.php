@@ -38,8 +38,8 @@
                                 <input type="text" class="form-control" id="nome" name="nome" value="<?= $usuario->nome ?>" required>
                             </div>
                             <div class="form-group px-2 col-md-6">
-                                <label for="nome_usr">Nome de usuário:</label>
-                                <input type="text" class="form-control" id="nome_usr" name="nome_usr" value="<?= $usuario->nome_usr ?>" required>
+                                <label for="nome_usr">Login de usuário:</label>
+                                <input type="text" class="form-control" id="nome_usr" name="nome_usr" value="<?= $usuario->nome_usr ?>" disabled>
                             </div>
                         </div>
                         <div class="form-row">

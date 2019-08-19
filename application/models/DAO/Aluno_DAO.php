@@ -21,14 +21,13 @@ class Aluno_DAO extends CI_Model {
                     'publicacoes' => $aluno->publicacoes,
                     'trab_cientifico' => $aluno->trab_cientifico];
         $this->db->insert('aluno', $dados);
+        return $this->db->insert_id();
     }
 
     function buscar($campo, $valor) {
-        $this->db->select('*');
-        $this->db->from('aluno');
-        $this->db->where($campo, $valor);
-        $query = $this->db->get();
+        $query = $this->db->where($campo, $valor)->get('aluno');
 
+        $retAlunos = [];
         foreach($query->result() as $i => $aluno) {
             $retAlunos[$i] = Aluno::Builder($aluno->usuario_id);
             $retAlunos[$i]->set('disc_nprevistas', $aluno->disc_nprevistas)->set('cursos_atualizacao', $aluno->cursos_atualizacao)
@@ -51,20 +50,17 @@ class Aluno_DAO extends CI_Model {
                     'init_cientifica' => $aluno->init_cientifica,
                     'publicacoes' => $aluno->publicacoes,
                     'trab_cientifico' => $aluno->trab_cientifico];
-        $this->db->replace('aluno', $dados);
-        
+        return $this->db->replace('aluno', $dados);
     }
 
     function remover($usuario_id) {
-        $this->db->where('usuario_id', $usuario_id);
-        $this->db->delete('aluno');
+        return $this->db->where('usuario_id', $usuario_id)->delete('aluno');
     }
 
     function listar() {
-        $this->db->select('*');
-        $this->db->from('aluno');
-        $query = $this->db->get();
+        $query = $this->db->get('aluno');
 
+        $retAlunos = [];
         foreach($query->result() as $i => $aluno) {
             $retAlunos[$i] = Aluno::Builder($aluno->id);
             $retAlunos[$i]->set('disc_nprevistas', $aluno->disc_nprevistas)->set('cursos_atualizacao', $aluno->cursos_atualizacao)
@@ -129,10 +125,9 @@ class Aluno_DAO extends CI_Model {
                     break;
                 }
             }
-            $this->db->where('usuario_id', $usuario_id);
-            $this->db->update('aluno');
+            $this->db->where('usuario_id', $usuario_id)->update('aluno');
         }
-        $this->db->trans_complete();
+        return $this->db->trans_complete();
     }
 }
 

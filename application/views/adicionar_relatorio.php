@@ -72,7 +72,7 @@
                                 <td>
                                     <span class="btn btn-light fileinput-button px-3">
                                         <i class="fas fa-arrow-up"></i>
-                                        <input type="file" name="comprovante[]">
+                                        <input type="file" name="comprovante[]" accept=".gif,.jpg,.jpeg,.png,.pdf,.doc,.docx,.zip">
                                     </span>
                                 </td>
                             </tr>

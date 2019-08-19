@@ -26,7 +26,7 @@
                     <p>Para redefinir sua senha digite o e-mail associado ao seu cadastro no sistema:</p>
                     <form action="<?= base_url('index.php/controle_senha/redefinir_senha')?>" method="POST" class="mx-auto">
                         <div class="input-group form-group">
-                            <input class="form-control" name="email" placeholder="email@exemplo.com" required>
+                            <input type="email" class="form-control" name="email" placeholder="email@exemplo.com" required>
                         </div>
                         <input type="submit" value="Redefinir" class="w-100">
                     </form>

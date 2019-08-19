@@ -8,27 +8,35 @@ class Portal extends CI_Controller {
             $this->load->view('templates/head');
             $this->load->view('index');
             $this->load->view('templates/scripts');
-            $this->load->view('templates/footer');
-        }
-        else {
-            if($_SESSION['usr_autenticado']['tipo'] !== "ADM") {   
-                redirect(base_url('index.php/controle_usuario/dados_usr'));
+            if(isset($_SESSION['status']) && isset($_SESSION['msg'])) {
+                if($_SESSION['status'] == TRUE) {
+                    $this->load->view('templates/msg_sucesso', $_SESSION);
+                }
+                else {
+                    $this->load->view('templates/msg_erro', $_SESSION);
+                }
             }
-            redirect(base_url('index.php/controle_usuario/'));
-        }
-    }
-
-    public function avaliar() {
-        if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado']) && $_SESSION['usr_autenticado']['tipo'] == "C") {
-            $this->load->view('templates/head');
-            $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar', $_SESSION['usr_autenticado']);
-            $this->load->view('avaliar');
-            $this->load->view('templates/scripts');
             $this->load->view('templates/footer');
         }
         else {
-            redirect(base_url('index.php'));
+            switch($_SESSION['usr_autenticado']['tipo'])
+            {
+                case "AL": {
+                    redirect(base_url("index.php/controle_usuario/dados_usr/{$_SESSION[usr_autenticado][id]}"));
+                    break;
+                }
+                case "C": {
+                    redirect(base_url("index.php/controle_relatorio/relatorios_pendentes"));
+                    break;
+                }
+                case "ADM": {
+                    redirect(base_url('index.php/controle_usuario/'));
+                    break;
+                }
+                default: {
+                    show_404();
+                }
+            }
         }
     }
 }

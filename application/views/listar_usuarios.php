@@ -48,7 +48,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php for($i=($usr_autenticado['tipo'] == "C") ? 0 : 1, $max=0; $i<count($usuarios) && $max<8; $i++, $max++): ?>
+                        <?php for($i=0, $max=0; $i<count($usuarios) && $max<8; $i++, $max++): ?>
                         <tr>
                             <td>
                                 <?php if($usr_autenticado['tipo'] == "C"): ?>

@@ -22,11 +22,9 @@ class Atividade_DAO extends CI_Model {
     }
 
     function buscar($campo, $valor) {
-        $this->db->select('*');
-        $this->db->from('atividade');
-        $this->db->where($campo, $valor);
-        $query = $this->db->get();
+        $query = $this->db->where($campo, $valor)->get('atividade');
 
+        $retAtividades = [];
         foreach($query->result() as $i => $atv) {
             $retAtividades[$i] = Atividade::Builder($atv->id, $atv->relatorio_id, $atv->nome, $atv->data, $atv->qtd_horas, 
                                                     $atv->categoria, $atv->comprovante);
@@ -44,19 +42,17 @@ class Atividade_DAO extends CI_Model {
                      'horas_validadas' => $atv->horas_validadas,
                      'categoria' => $atv->categoria,
                      'comprovante' => $atv->comprovante];
-        $this->db->replace('atividade', $dados);
+        return $this->db->replace('atividade', $dados);
     }
 
     function remover($campo_unico, $valor) {
-        $this->db->where($campo_unico, $valor);
-        $this->db->delete('atividade');
+        return $this->db->where($campo_unico, $valor)->delete('atividade');
     }
 
     function listar() {
-        $this->db->select('*');
-        $this->db->from('atividade');
-        $query = $this->db->get();
+        $query = $this->db->get('atividade');
 
+        $retAtividades = [];
         foreach($query->result() as $i => $atv) {
             $retAtividades[$i] = Atividade::Builder($atv->id, $atv->relatorio_id, $atv->nome, $atv->data, $atv->qtd_horas, 
                                                     $atv->categoria, $atv->comprovante);
@@ -66,18 +62,12 @@ class Atividade_DAO extends CI_Model {
     }
 
     function somar_horas_informadas($relatorio_id) {
-        $this->db->select_sum('qtd_horas', 'soma_horas');
-        $this->db->where('relatorio_id', $relatorio_id);
-        $this->db->from('atividade');
-        $query = $this->db->get();
+        $query = $this->db->select_sum('qtd_horas', 'soma_horas')->where('relatorio_id', $relatorio_id)->get('atividade');
         return $query->result()[0]->soma_horas;
     }
 
     function somar_horas_validadas($relatorio_id) {
-        $this->db->select_sum('horas_validadas', 'soma_horas');
-        $this->db->where('relatorio_id', $relatorio_id);
-        $this->db->from('atividade');
-        $query = $this->db->get();
+        $query = $this->db->select_sum('horas_validadas', 'soma_horas')->where('relatorio_id', $relatorio_id)->get('atividade');
         return $query->result()[0]->soma_horas;
     }
 }

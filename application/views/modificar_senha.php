@@ -29,10 +29,12 @@
                             <div class="form-group px-2 col-md-4">
                                 <label for="nova_senha">Nova senha:</label>
                                 <input type="password" class="form-control" id="nova_senha" name="nova_senha" pattern=".{8,}" required>
+                                <small class="form-text text-muted ml-1">A senha deve conter no mínimo 8 caracteres</small>
                             </div>
                             <div class="form-group px-2 col-md-4">
                                 <label for="conf_nova_senha">Confirmar nova senha:</label>
                                 <input type="password" class="form-control" id="conf_nova_senha" name="conf_nova_senha" pattern=".{8,}" required>
+                                <small class="form-text text-muted ml-1">A senha deve conter no mínimo 8 caracteres</small>
                             </div>
                         </div>
                         <button type="submit" class="d-block mx-auto btn btn-primary">Cadastrar nova senha</button>

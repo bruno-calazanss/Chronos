@@ -9,9 +9,10 @@
         <link rel="stylesheet" href="<?= base_url('css/global.css') ?>">
         <link rel="stylesheet" href="<?= base_url('fontawesome/css/all.css') ?>">
         <link rel="stylesheet" href="<?= base_url('bootstrap4/css/bootstrap.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('css/sticky-footer.css') ?>">
         <?php if(!empty($fileUpload) && $fileUpload): ?>
         <link rel="stylesheet" href="<?= base_url('blueimp-file-upload/css/jquery.fileupload.css')?>">
         <?php endif; ?>
-        <title>TCC</title>
+        <title>Chronos</title>
     </head>
     <body>

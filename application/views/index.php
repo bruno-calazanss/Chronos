@@ -23,7 +23,7 @@
             <div class="card bg-light mb-3" style>
                 <div class="card-header text-center">Área de acesso</div>
                 <div class="card-body pt-0">
-                    <img class="img-fluid d-block mx-auto my-4" src="<?= base_url("img/hourglass-152090_960_720.png"); ?>" alt="Chronos">
+                    <img class="w-100 d-block mx-auto my-4" src="<?= base_url("img/logo.svg"); ?>" alt="Chronos">
                     <form action="<?= base_url('index.php/controle_usuario/autenticar')?>" method="POST" class="mx-auto">
                         <div class="input-group form-group">
                             <span class="input-group-text input-group-prepend">

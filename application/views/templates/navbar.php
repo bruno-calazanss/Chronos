@@ -22,8 +22,11 @@
 </style>
 
 <nav class="navbar navbar-dark bg-dark shadow p-0">
-    <div class="navbar-brand col-12 col-sm-5 col-md-3 col-lg-2 text-truncate" href="#">
+    <div class="navbar-brand mx-0 col-12 col-sm-5 col-md-3 col-lg-2 text-truncate">
         <a class="navbar-brand mr-2 p-0" href="#"><i class="fas fa-bars d-inline d-md-none"></i></a>
         <a class="navbar-brand p-0" href="#">Menu</a>
+    </div>
+    <div class="navbar-brand m-0 p-1 d-none d-sm-block col-sm-7 col-md-9 col-lg-10 position-absolute h-100" style="background-color: inherit; right: 0;" href="#">
+        <img class="w-100 mx-auto h-100" src="<?= base_url("img/logo.svg"); ?>" style="filter: invert(1);" alt="Chronos">
     </div>
 </nav>

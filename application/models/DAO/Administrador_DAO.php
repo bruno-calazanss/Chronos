@@ -11,14 +11,13 @@ class Administrador_DAO extends CI_Model {
     function inserir($adm) {
         $dados = ['usuario_id' => $adm->usuario_id];
         $this->db->insert('administrador', $dados);
+        return $this->db->insert_id();
     }
 
     function buscar($campo, $valor) {
-        $this->db->select('*');
-        $this->db->from('administrador');
-        $this->db->where($campo, $valor);
-        $query = $this->db->get();
+        $query = $this->db->where($campo, $valor)->get('administrador');
 
+        $retAdms = [];
         foreach($query->result() as $i => $adm) {
             $retAdms[$i] = Administrador::Builder($adm->id);
         }
@@ -27,20 +26,17 @@ class Administrador_DAO extends CI_Model {
 
     function editar($adm) {
         $dados = ['usuario_id' => $adm->usuario_id];
-        $this->db->replace('administrador', $dados);
-        
+        return $this->db->replace('administrador', $dados);
     }
 
     function remover($usuario_id) {
-        $this->db->where('usuario_id', $usuario_id);
-        $this->db->delete('administrador');
+        return $this->db->where('usuario_id', $usuario_id)->delete('administrador');
     }
 
     function listar() {
-        $this->db->select('*');
-        $this->db->from('administrador');
-        $query = $this->db->get();
+        $query = $this->db->get('administrador');
 
+        $retAdms = [];
         foreach($query->result() as $i => $adm) {
             $retAdms[$i] = Administrador::Builder($adm->id);
         }
