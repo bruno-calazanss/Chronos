@@ -180,9 +180,19 @@ class Controle_usuario extends CI_Controller {
             $this->form_validation->set_rules('nome', 'Nome', 'required|max_length[80]');
 
             if ($this->form_validation->run() == TRUE) {
-                $status = $this->usuario_dao->alterar_dados($id, $this->input->post('matricula'), $this->input->post('email'),
-                                                            $this->input->post('nome'), $this->input->post('nome_usr'));
-                if($status) {
+                $usr = $this->usuario_dao->buscar('id', $id)[0];
+
+                if(!empty($this->usuario_dao->buscar('email', $this->input->post('email'))) && $usr->email != $this->input->post('email')) {
+                    $this->session->set_flashdata(["status" => FALSE, "msg" => "Erro: e-mail já cadastrado!"]);
+                    redirect(base_url('index.php/controle_usuario/'));
+                }
+
+                if(!empty($this->usuario_dao->buscar('matricula', $this->input->post('matricula'))) && $usr->matricula != $this->input->post('matricula')) {
+                    $this->session->set_flashdata(["status" => FALSE, "msg" => "Erro: matrícula já cadastrada!"]);
+                    redirect(base_url('index.php/controle_usuario/'));
+                }
+
+                if($this->usuario_dao->alterar_dados($id, $this->input->post('matricula'), $this->input->post('email'), $this->input->post('nome'))) {
                     $this->session->set_flashdata(["status" => TRUE, "msg" => "Dados atualizados com sucesso!"]);
                     redirect(base_url('index.php/controle_usuario/listar_usuarios'));
                 }
@@ -209,6 +219,21 @@ class Controle_usuario extends CI_Controller {
             if ($this->form_validation->run() == TRUE) {
                 $this->load->model(['usuario', 'DAO/usuario_dao']);
                 $this->load->helper('string');
+
+                if($this->usuario_dao->buscar('nome_usr', $this->input->post('nome_usr'))) {
+                    $this->session->set_flashdata(["status" => FALSE, "msg" => "Erro: nome de usuário já cadastrado!"]);
+                    redirect(base_url('index.php/controle_usuario/'));
+                }
+                
+                if($this->usuario_dao->buscar('email', $this->input->post('email'))) {
+                    $this->session->set_flashdata(["status" => FALSE, "msg" => "Erro: e-mail já cadastrado!"]);
+                    redirect(base_url('index.php/controle_usuario/'));
+                }
+
+                if($this->usuario_dao->buscar('matricula', $this->input->post('matricula'))) {
+                    $this->session->set_flashdata(["status" => FALSE, "msg" => "Erro: matrícula já cadastrada!"]);
+                    redirect(base_url('index.php/controle_usuario/'));
+                }
 
                 $this->db->trans_begin();
                 

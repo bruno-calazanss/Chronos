@@ -80,7 +80,7 @@
                             <tr>
                                 <td colspan="3" class="d-table-cell border-0 btn btn-primary">
                                     <i class="fas fa-plus"></i>
-                                    Adicionar item
+                                    Adicionar atividade
                                 </td>
                                 <td colspan="2" onclick="$('#enviar').trigger('click')" class="d-table-cell border-0 btn btn-success">
                                     <i class="fas fa-save"></i>

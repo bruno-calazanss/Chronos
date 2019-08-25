@@ -30,7 +30,7 @@
                         <figcaption class="text-center h6"><?= $usuario->nome_usr ?></figcaption>
                     </figure>
                     <div class="form-group d-block d-sm-inline-block mx-0 mr-sm-4 text-left text-lg-left">
-                        <label class="h5">Aluno(a):</label>
+                        <label class="h5">Nome:</label>
                         <input class="form-control" type="text" value="<?= $usuario->nome ?>" size="50" disabled>
                     </div>
                     <div class="form-group d-block d-sm-inline-block mx-0 mr-sm-4 text-left text-lg-left">

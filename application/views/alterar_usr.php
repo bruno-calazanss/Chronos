@@ -17,7 +17,7 @@
         <main role="main" class="col-md-9 col-lg-10 px-5 pt-5">
             <div id="user" class="card">
                 <div class="card-header">
-                    Formulário de cadastro
+                    Formulário de alteração
                 </div>
                 <div class="card-body">
                     <form action="<?= base_url("index.php/controle_usuario/alterar/$usuario->id")?>" method="POST">
