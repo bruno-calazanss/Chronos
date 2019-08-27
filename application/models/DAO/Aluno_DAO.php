@@ -129,6 +129,48 @@ class Aluno_DAO extends CI_Model {
         }
         return $this->db->trans_complete();
     }
+
+    function verificar_limites($id) {
+        $aluno = $this->buscar('usuario_id', $id)[0];
+        if($aluno) {
+            $ret['ensino'] = 60-($aluno->disc_nprevistas+$aluno->cursos_atualizacao+$aluno->monitoria+$aluno->estagio_nobrigatorio);
+            $ret[10] = 20-$aluno->disc_nprevistas;
+            $ret[11] = 20-$aluno->cursos_atualizacao;
+            $ret[12] = 20-$aluno->monitoria;
+            $ret[13] = 20-$aluno->estagio_nobrigatorio;
+            $ret['extensao'] = 40-($aluno->ev_internos+$aluno->ev_externos+$aluno->cursos_ext);
+            $ret[20] = 30-$aluno->ev_internos;
+            $ret[21] = 30-$aluno->ev_externos;
+            $ret[22] = 10-$aluno->cursos_ext;
+            $ret['pesquisa'] = 30-($aluno->init_cientifica+$aluno->publicacoes+$aluno->trab_cientifico);
+            $ret[30] = 20-$aluno->init_cientifica;
+            $ret[31] = 20-$aluno->publicacoes;
+            $ret[32] = 20-$aluno->trab_cientifico;
+        } else {
+            return FALSE;
+        }
+        return $ret;
+    }
+
+    function somatorio_atividades($atvs) {
+        foreach($atvs as $atv) {
+            if(!isset($ret[$atv->categoria])) $ret[$atv->categoria] = 0;
+            $ret[$atv->categoria] += $atv->qtd_horas;
+            if($atv->categoria < 20) {
+                if(!isset($ret['ensino'])) $ret['ensino'] = 0;
+                $ret['ensino'] += $atv->qtd_horas;
+            }
+            elseif($atv->categoria < 30) {
+                if(!isset($ret['extensao'])) $ret['extensao'] = 0;
+                $ret['extensao'] += $atv->qtd_horas;
+            }
+            else {
+                if(!isset($ret['pesquisa'])) $ret['pesquisa'] = 0;
+                $ret['pesquisa'] += $atv->qtd_horas;
+            }
+        }
+        return $ret;
+    }
 }
 
 ?>

@@ -12,13 +12,16 @@ class Atividade extends CI_Model {
     public $categoria;
     public $comprovante;
 
-    public const string_categorias = [10 => "Disciplinas não previstas", 
+    public const string_categorias = ['ensino' => "Ensino",
+                                      10 => "Disciplinas não previstas", 
                                       11 => "Cursos de atualização", 
                                       12 => "Monitoria",
                                       13 => "Estágio não-obrigatório", 
+                                      'extensao' => "Extensão",
                                       20 => "Eventos internos", 
                                       21 => "Eventos externos", 
                                       22 => "Ministrar cursos de extensão", 
+                                      'pesquisa' => "Pesquisa",
                                       30 => "Iniciação científica (Tecnológica e Inovação)",
                                       31 => "Publicações",
                                       32 => "Apresentação de trabalho científico"];
@@ -66,8 +69,11 @@ class Atividade extends CI_Model {
 
             $dadosArq = [];
             foreach($_FILES['comprovante']['name'] as $i => $arq) {
-                if(empty($_FILES['comprovante']['name'][$i])) continue;
-
+                if(empty($_FILES['comprovante']['name'][$i])) { 
+                    $dadosArq[$i] = NULL; 
+                    continue;
+                }
+                
                 $_FILES['aux']['name']     = $_FILES['comprovante']['name'][$i];
                 $_FILES['aux']['type']     = $_FILES['comprovante']['type'][$i];
                 $_FILES['aux']['tmp_name'] = $_FILES['comprovante']['tmp_name'][$i];

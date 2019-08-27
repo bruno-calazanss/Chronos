@@ -64,7 +64,7 @@
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="number" min="0" name="horas_validadas[]" required>
+                                    <input class="form-control" type="number" min="0" max="<?= $atv->qtd_horas ?>" name="horas_validadas[]" required>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

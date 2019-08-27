@@ -85,6 +85,7 @@ class Controle_relatorio extends CI_Controller {
     function enviar() {
         if(isset($_SESSION['usr_autenticado']) && !empty($_SESSION['usr_autenticado']) && $_SESSION['usr_autenticado']['tipo'] == "AL") {
             // $this->output->enable_profiler(TRUE);
+            $this->load->model(['aluno', 'DAO/aluno_dao']);
 
             // VALIDATION RULES
             $this->form_validation->set_rules('nome[]', 'Nome da atividade', 'required|max_length[80]');
@@ -99,11 +100,26 @@ class Controle_relatorio extends CI_Controller {
                 $id = $this->relatorio_dao->inserir($relatorio);
 
                 $uploads = $this->atividade->enviarComprovantes($id);
-                if(isset($uploads)) {    
+                if(isset($uploads)) {
+
+                    $atvs = [];
                     for($i = 0; $i < count($this->input->post('nome[]')); $i++) {
-                        $atv = Atividade::Builder($i+1, $id, $this->input->post('nome[]')[$i], $this->input->post('data[]')[$i], 
+                        $atvs[$i] = Atividade::Builder($i+1, $id, $this->input->post('nome[]')[$i], $this->input->post('data[]')[$i], 
                         $this->input->post('horas[]')[$i], $this->input->post('categoria[]')[$i], $uploads[$i]['full_path']);
-                        $this->atividade_dao->inserir($atv);
+                        $this->atividade_dao->inserir($atvs[$i]);
+                    }
+
+                    $limites = $this->aluno_dao->verificar_limites($this->session->usr_autenticado['id']);
+                    $somatorio = $this->aluno_dao->somatorio_atividades($atvs);
+
+                    foreach($somatorio as $idx => $categoria) {
+                        if($limites[$idx] - $somatorio[$idx] < 0) {
+                            $this->db->trans_rollback();
+                            $this->session->set_flashdata(["status" => FALSE, "msg" => "Relatório não enviado! As horas informadas ultrapassam o 
+                                                                                        limite da categoria \"" . Atividade::string_categorias[$idx] . ".\"<br><br>
+                                                                                        Consulte seus dados para verificar seus limites e tente novamente." ]);
+                            redirect(base_url('index.php/controle_relatorio'));
+                        }
                     }
 
                     if($this->db->trans_status() === TRUE) {
