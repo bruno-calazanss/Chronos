@@ -25,6 +25,23 @@
 <div class="container-fluid">
     <div class="row justify-content-end">
         <main role="main" class="col-md-9 col-lg-10 px-5 pt-5">
+            <!-- <form action="<?= base_url('index.php/controle_usuario/cadastrar')?>" method="POST">
+                <div class="form-row align-items-end">
+                    <div class="form-group px-2 col-md-6">
+                        <input type="text" class="form-control" id="matricula" name="matricula" placeholder="Palavra-chave" required>
+                    </div>
+                    <div class="form-group px-2 col-md-4">
+                        <select id="tipo" name="tipo" class="form-control" required>
+                            <option disabled selected hidden>Campo</option>
+                            <option value="AL">Aluno</option>
+                            <option value="C">Coordenador</option>
+                        </select>
+                    </div>
+                    <div class="form-group px-2 col-md-2">
+                        <button type="submit" class="btn btn-primary">Filtrar</button>
+                    </div>
+                </div>
+            </form> -->
             <div class="table-responsive">
                 <table class="collection table table-bordered table-hover">
                     <thead class="font-weight-bold bg-light">
